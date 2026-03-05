@@ -1,0 +1,172 @@
+{
+  "design_system": {
+    "identity": {
+      "name": "WebCairn",
+      "metaphor": "The Digital Monument (Stability + Art)",
+      "vibe": "Digital Brutalism meets Organic Zen. Structural, bold, yet balanced.",
+      "emotional_tone": "Reliable, Creative, Timeless"
+    },
+    "typography": {
+      "headings": {
+        "family": "\"Syne\", sans-serif",
+        "weights": ["700", "800"],
+        "style": "Artistic, wide, aggressive",
+        "source": "https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
+      },
+      "body": {
+        "family": "\"Manrope\", sans-serif",
+        "weights": ["400", "500", "600"],
+        "style": "Clean, geometric, legible",
+        "source": "https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      },
+      "rules": [
+        "Headings must be MASSIVE (text-6xl to text-9xl).",
+        "Use tight tracking (tracking-tighter) for headings.",
+        "Use wide tracking (tracking-widest) for overline labels."
+      ]
+    },
+    "colors": {
+      "strategy": "High Contrast Editorial",
+      "light_theme": {
+        "background": "#F5F5F0",
+        "foreground": "#1A1A1A",
+        "primary": "#FF4400",
+        "secondary": "#E0E0D5",
+        "accent": "#2A2A2A",
+        "muted": "#D6D6CC",
+        "border": "#1A1A1A"
+      },
+      "dark_theme": {
+        "background": "#0F0F0F",
+        "foreground": "#F0F0F0",
+        "primary": "#FF5500",
+        "secondary": "#1F1F1F",
+        "accent": "#CCFF00",
+        "muted": "#2A2A2A",
+        "border": "#333333"
+      },
+      "palette_instructions": "Light mode is STONE (warm grey/beige) with BLACK text and ORANGE accents. Dark mode is BASALT (deep grey) with WHITE text and NEON accents."
+    },
+    "layout": {
+      "grid_system": "The Tetris Grid (Mode A)",
+      "spacing": "Generous. Use p-12, p-24 for section padding.",
+      "container": "Max width 1920px (almost full width), but with generous side margins.",
+      "alignment": "Asymmetric. Never center the hero text. Stack it left or right.",
+      "z_index": "Use z-index to layer text over images or vice versa."
+    },
+    "components": {
+      "buttons": {
+        "style": "Sharp corners or Pill. No standard rounded-md.",
+        "hover": "Slide up effect or color invert."
+      },
+      "cards": {
+        "style": "No borders, just spacing. Or 1px solid border with NO border-radius.",
+        "hover": "Image zoom or slight lift."
+      },
+      "navigation": {
+        "style": "Floating. Glassmorphism is permitted but keep it subtle.",
+        "position": "Sticky top or fixed bottom-right (experimental)."
+      }
+    },
+    "motion": {
+      "library": "framer-motion",
+      "scrolling": "lenis (MANDATORY)",
+      "transitions": "Spring physics (stiff: 100, damping: 20).",
+      "effects": [
+        "Parallax on images",
+        "Text reveal (staggered letters)",
+        "Marquee for skills"
+      ]
+    },
+    "accessibility": {
+      "contrast": "Ensure APCA compliance. Use text-shadow if placing text over images.",
+      "motion": "Respect prefers-reduced-motion."
+    }
+  },
+  "assets": {
+    "images": [
+      {
+        "category": "Hero",
+        "url": "https://images.unsplash.com/photo-1759192154601-d8849f778b57?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwxfHxiYWxhbmNlZCUyMHN0b25lcyUyMGNhaXJuJTIwYWJzdHJhY3QlMjBtaW5pbWFsaXN0fGVufDB8fHx8MTc3MjcwNjY2N3ww&ixlib=rb-4.1.0&q=85",
+        "description": "Stack of rocks on a wall - Main Hero Visual",
+        "position": "Right side, parallax"
+      },
+      {
+        "category": "About",
+        "url": "https://images.unsplash.com/photo-1772391756679-430042790939?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjcmVhdGl2ZSUyMG9mZmljZSUyMHRlYW0lMjB3b3JraW5nJTIwYWJzdHJhY3R8ZW58MHx8fHwxNzcyNzA2NjY4fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract shapes - Creative Team Representation",
+        "position": "About section grid"
+      },
+      {
+        "category": "Services",
+        "url": "https://images.unsplash.com/photo-1772354872828-54f6c971cfa7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwzfHxiYWxhbmNlZCUyMHN0b25lcyUyMGNhaXJuJTIwYWJzdHJhY3QlMjBtaW5pbWFsaXN0fGVufDB8fHx8MTc3MjcwNjY2N3ww&ixlib=rb-4.1.0&q=85",
+        "description": "Balanced stones - Services Background/Accent",
+        "position": "Background overlay"
+      }
+    ],
+    "icons": {
+      "library": "lucide-react",
+      "style": "Stroke width 1.5px or 1px (Thin & Elegant)"
+    }
+  },
+  "page_structure": {
+    "sections": [
+      {
+        "name": "Hero",
+        "type": "Impact",
+        "elements": [
+          "Massive Headline: 'WE BUILD DIGITAL MONUMENTS'",
+          "Subheadline: 'WebCairn. Stability in a chaotic web.'",
+          "Floating 3D-style Stone Image",
+          "CTA Button: 'Start Climbing'"
+        ]
+      },
+      {
+        "name": "Services",
+        "type": "Grid",
+        "layout": "Bento Grid / Tetris",
+        "elements": [
+          "Card 1: 'Showcase Sites' (Large)",
+          "Card 2: 'Art Direction' (Tall)",
+          "Card 3: 'Motion' (Square)"
+        ]
+      },
+      {
+        "name": "Portfolio",
+        "type": "Gallery",
+        "layout": "Horizontal Scroll or Masonry",
+        "elements": ["Project A", "Project B", "Project C"]
+      },
+      {
+        "name": "About",
+        "type": "Story",
+        "layout": "Split Screen",
+        "elements": ["The Architects (Text)", "Abstract Visual (Image)"]
+      },
+      {
+        "name": "Contact",
+        "type": "Form",
+        "layout": "Minimalist",
+        "elements": ["Visual Form (Name, Email, Message)", "Big 'SEND SIGNAL' button"]
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "INSTALL: npm install framer-motion lenis @radix-ui/react-slot class-variance-authority clsx tailwind-merge lucide-react",
+    "SETUP: Add the Syne and Manrope fonts to index.css immediately.",
+    "THEME: Implement a robust ThemeProvider that supports 'light' (default) and 'dark'.",
+    "LANG: Implement a simple LanguageContext for EN/FR switching.",
+    "LAYOUT: Do NOT use standard centered containers. Use full width with padding.",
+    "ANIMATION: Wrap the entire app in a Lenis provider. Use Framer Motion for all enter animations.",
+    "COMPONENT PATHS: Use /app/frontend/src/components/ui/ for shadcn components. Create custom ones in /app/frontend/src/components/custom/."
+  ],
+  "universal_guidelines": [
+    "Don't make generic centered layouts.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Every interaction needs micro-animations.",
+    "Use 2-3x more spacing than feels comfortable.",
+    "Subtle grain textures and noise overlays are encouraged.",
+    "Use 'sonner' for toasts.",
+    "Components MUST use named exports."
+  ]
+}

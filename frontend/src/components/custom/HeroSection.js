@@ -40,7 +40,7 @@ export const HeroSection = () => {
             initial={{ y: 120 }}
             animate={{ y: 0 }}
             transition={{ type: 'spring', stiffness: 60, damping: 20, delay: 0.3 }}
-            className="font-['Syne'] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tighter leading-[0.9] max-w-[16ch]"
+            className="font-['Syne'] font-extrabold text-[2.5rem] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tighter leading-[0.9] max-w-[16ch]"
           >
             {t.hero.headline}
           </motion.h1>

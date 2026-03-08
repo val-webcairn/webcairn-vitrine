@@ -9,7 +9,7 @@ export const HeroSection = () => {
   return (
     <section
       data-testid="hero-section"
-      className="relative min-h-screen flex items-end pb-16 md:pb-24 overflow-hidden"
+      className="relative min-h-screen flex items-end pb-16 md:pb-24 lg:pb-12 overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.04]">
@@ -18,12 +18,12 @@ export const HeroSection = () => {
       </div>
 
       {/* Large background number */}
-      <div className="absolute top-16 right-6 md:right-20 text-[15rem] md:text-[25rem] font-['Syne'] font-extrabold leading-none text-foreground opacity-[0.03] select-none pointer-events-none">
+      <div className="absolute top-16 right-6 md:right-20 text-[15rem] md:text-[25rem] lg:text-[20rem] font-['Syne'] font-extrabold leading-none text-foreground opacity-[0.03] select-none pointer-events-none">
         W
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full px-6 md:px-12 lg:px-20">
+      <div className="relative z-10 w-full px-6 md:px-12 lg:px-20 lg:pt-[18vh]">
         {/* Overline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -40,14 +40,14 @@ export const HeroSection = () => {
             initial={{ y: 120 }}
             animate={{ y: 0 }}
             transition={{ type: 'spring', stiffness: 60, damping: 20, delay: 0.3 }}
-            className="font-['Syne'] font-extrabold text-[2.5rem] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tighter leading-[0.9] max-w-[16ch]"
+            className="font-['Syne'] font-extrabold text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] tracking-tighter leading-[0.9] max-w-[16ch]"
           >
             {t.hero.headline}
           </motion.h1>
         </div>
 
         {/* Sub + CTA row */}
-        <div className="mt-10 md:mt-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="mt-10 md:mt-16 lg:mt-8 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,7 +82,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="mt-16 md:mt-24 flex items-center gap-3 text-muted-foreground"
+          className="mt-16 md:mt-24 lg:mt-10 flex items-center gap-3 text-muted-foreground"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
@@ -107,6 +107,10 @@ export const HeroSection = () => {
             alt="Cairn stones"
             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
           />
+          {/* Gradient fade on left edge for text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--background))] via-[hsl(var(--background)/0.4)] to-transparent w-2/5" />
+          {/* Gradient fade on bottom edge */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))] to-transparent to-40%" />
           <div className="absolute -bottom-4 -left-4 w-full h-full border border-[hsl(var(--primary))] -z-10" />
         </div>
       </motion.div>

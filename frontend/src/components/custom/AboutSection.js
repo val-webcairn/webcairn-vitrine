@@ -8,9 +8,9 @@ export const AboutSection = () => {
   const stats = [t.about.stat1, t.about.stat2, t.about.stat3];
 
   return (
-    <section id="about" data-testid="about-section" className="py-24 md:py-32 px-6 md:px-12 lg:px-20">
+    <section id="about" data-testid="about-section" className="py-24 md:py-32 lg:py-16 px-6 md:px-12 lg:px-20">
       {/* Header */}
-      <div className="mb-16 md:mb-24">
+      <div className="mb-16 md:mb-24 lg:mb-12">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -31,7 +31,7 @@ export const AboutSection = () => {
       </div>
 
       {/* Split content */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-16">
         {/* Left - Image */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -40,7 +40,7 @@ export const AboutSection = () => {
           transition={{ type: 'spring', stiffness: 60, damping: 20 }}
           className="relative"
         >
-          <div className="aspect-[3/4] overflow-hidden">
+          <div className="aspect-[3/4] lg:aspect-[5/4] overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1772391756679-430042790939?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjcmVhdGl2ZSUyMG9mZmljZSUyMHRlYW0lMjB3b3JraW5nJTIwYWJzdHJhY3R8ZW58MHx8fHwxNzcyNzA2NjY4fDA&ixlib=rb-4.1.0&q=85&w=800"
               alt="Team"
@@ -59,10 +59,10 @@ export const AboutSection = () => {
           transition={{ type: 'spring', stiffness: 60, damping: 20, delay: 0.2 }}
           className="flex flex-col justify-center"
         >
-          <p className="text-lg md:text-xl leading-relaxed text-foreground mb-8">
+          <p className="text-lg md:text-xl lg:text-lg leading-relaxed text-foreground mb-8 lg:mb-5">
             {t.about.p1}
           </p>
-          <p className="text-base text-muted-foreground leading-relaxed mb-12">
+          <p className="text-base lg:text-sm text-muted-foreground leading-relaxed mb-12 lg:mb-8">
             {t.about.p2}
           </p>
 
@@ -76,9 +76,9 @@ export const AboutSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 + i * 0.1 }}
-                className={`pt-8 ${i < 2 ? 'border-r border-border pr-6' : 'pl-6'}`}
+                className={`pt-6 ${i < 2 ? 'border-r border-border' : ''} ${i === 1 ? 'pl-3 pr-3 md:pl-6 md:pr-6' : i === 2 ? 'pl-3 md:pl-6' : 'pr-3 md:pr-6'}`}
               >
-                <span className="font-['Syne'] font-extrabold text-3xl md:text-4xl tracking-tighter text-[hsl(var(--primary))]">
+                <span className="font-['Syne'] font-extrabold text-2xl md:text-4xl lg:text-3xl tracking-tighter text-[hsl(var(--primary))]">
                   {stat.num}
                 </span>
                 <p className="text-xs md:text-sm text-muted-foreground tracking-wider uppercase mt-2">

@@ -2,37 +2,23 @@ import React, { createContext, useContext, useState } from 'react';
 
 const translations = {
   en: {
-    nav: { services: 'Services', portfolio: 'Portfolio', about: 'About', contact: 'Contact' },
+    nav: { services: 'Services', portfolio: 'Portfolio', about: 'About', pricing: 'Pricing', aides: 'Grants', contact: 'Contact' },
     hero: {
-      overline: 'WEB DEVELOPMENT AGENCY',
-      headline: 'WE BUILD DIGITAL MONUMENTS',
-      sub: 'Stability in a chaotic web. We craft showcase websites that stand like cairns — simple, striking, enduring.',
-      cta: 'Start Climbing',
+      overline: 'SHOWCASE WEBSITE CREATION — PACA REGION',
+      headline: 'YOUR SHOWCASE SITE, STONE BY STONE',
+      sub: 'I design and develop showcase websites for artisans and restaurant owners. Clean, fast, memorable — built to last like a cairn.',
+      cta: 'Lay the first stone',
       scroll: 'Scroll to explore'
     },
     services: {
-      overline: 'WHAT WE DO',
+      overline: 'WHAT I DO',
       title: 'Services',
       items: [
         {
-          title: 'Showcase Sites',
-          desc: 'Clean, fast, memorable. We design and develop single-page and multi-page showcase websites that turn visitors into clients. No bloat, no complexity — just clarity.',
-          tag: 'CORE'
-        },
-        {
-          title: 'Art Direction',
-          desc: 'Every pixel tells a story. We define your visual identity — from color palettes to typography systems — so your brand speaks before you do.',
-          tag: 'IDENTITY'
-        },
-        {
-          title: 'Motion & Interaction',
-          desc: 'Static is dead. We add meaningful animations and micro-interactions that make your site feel alive without sacrificing performance.',
-          tag: 'CRAFT'
-        },
-        {
-          title: 'SEO & Performance',
-          desc: 'Beautiful is nothing if invisible. We optimize every site for search engines and speed, ensuring your monument is found and loads instantly.',
-          tag: 'REACH'
+          title: 'Showcase Website Creation',
+          desc: 'From design to deployment, I build your complete online presence. Responsive design, professional visuals, contact forms, Google Maps integration, SEO-optimized — everything you need to convert visitors into customers.',
+          tag: 'CORE',
+          features: ['Custom responsive design', 'Contact form & Maps', 'Basic SEO optimization', 'Performance & speed', 'Mobile-first approach', 'Content management']
         }
       ]
     },
@@ -40,105 +26,227 @@ const translations = {
       overline: 'SELECTED WORK',
       title: 'Portfolio',
       projects: [
-        { name: 'Maison Aurore', type: 'Interior Design Studio', year: '2024' },
-        { name: 'Alpiniste Coffee', type: 'Specialty Coffee Brand', year: '2024' },
-        { name: 'Atelier Verre', type: 'Glasswork Artisan', year: '2023' },
-        { name: 'Nordic Trails', type: 'Adventure Travel Agency', year: '2023' },
-        { name: 'Jardin Sonore', type: 'Music Festival', year: '2023' }
+        { name: 'La Fournée d\'Or', type: 'Artisan Bakery — Aix-en-Provence', year: '2025', desc: 'A warm, inviting showcase site for a traditional Provençal bakery. Online ordering and product gallery.' },
+        { name: 'Le Mas Provençal', type: 'Gourmet Restaurant — Marseille', year: '2025', desc: 'An elegant digital presence for a fine dining restaurant. Online menu, reservations, and photo gallery.' },
+        { name: 'Atelier Terre & Feu', type: 'Ceramic Artisan — Nice', year: '2024', desc: 'A refined portfolio for a ceramist. Workshop showcase, custom orders, and artisan story.' },
+        { name: 'Pizzeria Da Marco', type: 'Artisan Pizzeria — Toulon', year: '2024', desc: 'A vibrant site for an artisan pizzeria. Menu, online ordering, and customer reviews.' }
       ]
     },
     about: {
-      overline: 'WHO WE ARE',
-      title: 'The Architects',
-      p1: 'WebCairn was born from a simple belief: the web has too much noise and not enough craft. We are a small team of designers and developers based in France who obsess over details.',
-      p2: 'Like the cairns that guide hikers through fog, we build digital landmarks — simple structures that show the way. No databases, no payment systems, no unnecessary complexity. Just beautiful, fast, purposeful websites.',
-      stat1: { num: '47+', label: 'Projects Delivered' },
+      overline: 'ABOUT',
+      title: 'The Builder',
+      p1: 'I\'m Lilian, 19, web developer and auto-entrepreneur based in the PACA region. I\'m passionate about tech and design — I create showcase websites that truly represent artisans and local restaurant owners.',
+      p2: 'Like a cairn that guides hikers on the trail, I build digital landmarks for your business. No unnecessary complexity — just beautiful, fast, effective sites that bring you clients.',
+      stat1: { num: '10+', label: 'Projects Delivered' },
       stat2: { num: '100%', label: 'Client Satisfaction' },
-      stat3: { num: '< 1s', label: 'Avg Load Time' }
+      stat3: { num: '< 48h', label: 'Response Time' }
+    },
+    pricing: {
+      overline: 'PRICING',
+      title: 'Pricing',
+      sub: 'Clear and transparent pricing, tailored to your needs. Each package is customizable.',
+      plans: [
+        {
+          name: 'Essential',
+          price: '400 – 600€',
+          desc: 'The ideal start for your online presence.',
+          features: ['One-page website', 'Responsive design', 'Contact form', 'Basic SEO', 'Google Maps integration', 'Delivery in 2 weeks'],
+          cta: 'Choose Essential'
+        },
+        {
+          name: 'Ascension',
+          price: '800 – 1 200€',
+          desc: 'A more complete site to stand out.',
+          features: ['Multi-page site (up to 5)', 'Advanced custom design', 'Photo gallery', 'Advanced SEO', 'Social media integration', 'Delivery in 3–4 weeks'],
+          cta: 'Choose Ascension'
+        }
+      ],
+      note: 'All prices are tax-inclusive (auto-entrepreneur, VAT-exempt). Payment in 2 or 3 installments available.'
+    },
+    aides: {
+      overline: 'GRANTS & FUNDING',
+      title: 'Reduce the cost of your website',
+      sub: 'Grants exist to finance your online presence. I help you find the programs available for your situation.',
+      items: [
+        {
+          title: 'France Num',
+          desc: 'The official government portal to find digital grants suited to your business. Get your free diagnostic.',
+          amount: 'Variable',
+          link: 'https://www.francenum.gouv.fr/aides-et-financement'
+        },
+        {
+          title: 'Aides-Entreprises.fr',
+          desc: 'The official search engine that lists all national, regional, and local subsidies you may be eligible for.',
+          amount: 'All grants',
+          link: 'https://www.aides-entreprises.fr'
+        },
+        {
+          title: 'CCI Aix-Marseille',
+          desc: 'Your local chamber of commerce regularly offers digital support programs for businesses in the Bouches-du-Rhône.',
+          amount: 'Local',
+          link: 'https://www.cciamp.com'
+        }
+      ],
+      cta: 'CHECK MY ELIGIBILITY',
+      ctaLink: 'https://www.francenum.gouv.fr/aides-et-financement',
+      ctaSub: 'Free and no-obligation.'
     },
     contact: {
       overline: 'GET IN TOUCH',
       title: 'Let\'s Build',
-      sub: 'Ready to plant your monument on the web? Drop us a line.',
+      sub: 'Tell me about your project and I\'ll get back to you within 48 hours.',
       name: 'Your Name',
       email: 'Email Address',
-      message: 'Tell us about your project',
+      phone: 'Phone Number',
+      activity: 'Your Activity',
+      activityPlaceholder: 'e.g. Baker, Restaurant, Craftsman...',
+      message: 'Tell me about your project',
       send: 'SEND SIGNAL',
       info: 'hello@webcairn.fr'
     },
     footer: {
-      tagline: 'Building digital monuments since 2021.',
-      rights: 'All rights reserved.'
+      tagline: 'Showcase websites for artisans and restaurant owners in PACA.',
+      rights: 'All rights reserved.',
+      legal: 'Legal Notice',
+      nav: { services: 'Services', portfolio: 'Portfolio', pricing: 'Pricing', contact: 'Contact' }
+    },
+    legal: {
+      title: 'Legal Notice',
+      editor: 'Website Editor',
+      editorContent: 'Lilian Valette — EI (Individual Enterprise)\nSIRET: XXX XXX XXX XXXXX\nAddress: PACA Region, France\nEmail: hello@webcairn.fr\nPhone: On request',
+      host: 'Hosting',
+      hostContent: 'Vercel Inc.\n440 N Barranca Ave #4133\nCovina, CA 91723, USA',
+      ip: 'Intellectual Property',
+      ipContent: 'All content on this site (texts, images, graphics, logo) is the property of Lilian Valette / WebCairn and is protected by intellectual property laws. Any reproduction without prior authorization is prohibited.',
+      data: 'Personal Data & GDPR',
+      dataContent: 'Data collected via the contact form (name, email, phone, message) is used solely to respond to your request. No data is sold or shared with third parties. In accordance with the GDPR, you have the right to access, rectify, and delete your data by contacting hello@webcairn.fr.',
+      cookies: 'Cookies',
+      cookiesContent: 'This site does not use tracking cookies or third-party analytics tools.',
+      close: 'Close'
     }
   },
   fr: {
-    nav: { services: 'Services', portfolio: 'Réalisations', about: 'À propos', contact: 'Contact' },
+    nav: { services: 'Services', portfolio: 'Réalisations', about: 'À propos', pricing: 'Tarifs', aides: 'Aides', contact: 'Contact' },
     hero: {
-      overline: 'AGENCE DE DÉVELOPPEMENT WEB',
-      headline: 'ON BÂTIT DES MONUMENTS DIGITAUX',
-      sub: 'Stabilité dans un web chaotique. Nous créons des sites vitrines qui se dressent comme des cairns — simples, frappants, durables.',
-      cta: 'Commencer l\'ascension',
+      overline: 'CRÉATION DE SITES VITRINES — RÉGION PACA',
+      headline: 'VOTRE SITE VITRINE, PIERRE APRÈS PIERRE',
+      sub: 'Je conçois et développe des sites vitrines pour artisans et restaurateurs. Clairs, rapides, mémorables — bâtis pour durer comme un cairn.',
+      cta: 'Poser la première pierre',
       scroll: 'Défilez pour explorer'
     },
     services: {
-      overline: 'CE QUE NOUS FAISONS',
+      overline: 'CE QUE JE FAIS',
       title: 'Services',
       items: [
         {
-          title: 'Sites Vitrines',
-          desc: 'Clairs, rapides, mémorables. Nous concevons et développons des sites vitrines mono ou multi-pages qui transforment les visiteurs en clients. Pas de superflu — que de la clarté.',
-          tag: 'COEUR'
-        },
-        {
-          title: 'Direction Artistique',
-          desc: 'Chaque pixel raconte une histoire. Nous définissons votre identité visuelle — des palettes de couleurs aux systèmes typographiques — pour que votre marque parle avant vous.',
-          tag: 'IDENTITÉ'
-        },
-        {
-          title: 'Motion & Interaction',
-          desc: 'Le statique est mort. Nous ajoutons des animations et micro-interactions significatives qui donnent vie à votre site sans sacrifier la performance.',
-          tag: 'SAVOIR-FAIRE'
-        },
-        {
-          title: 'SEO & Performance',
-          desc: 'Le beau ne sert à rien s\'il est invisible. Nous optimisons chaque site pour les moteurs de recherche et la vitesse.',
-          tag: 'VISIBILITÉ'
+          title: 'Création de Sites Vitrines',
+          desc: 'Du design au déploiement, je construis votre présence en ligne complète. Design responsive, visuels professionnels, formulaire de contact, intégration Google Maps, optimisation SEO — tout ce qu\'il faut pour convertir vos visiteurs en clients.',
+          tag: 'CŒUR DE MÉTIER',
+          features: ['Design responsive sur mesure', 'Formulaire de contact & Maps', 'Optimisation SEO de base', 'Performance & rapidité', 'Approche mobile-first', 'Gestion de contenu']
         }
       ]
     },
     portfolio: {
-      overline: 'TRAVAUX SÉLECTIONNÉS',
-      title: 'Réalisations',
+      overline: 'RÉALISATIONS',
+      title: 'Portfolio',
       projects: [
-        { name: 'Maison Aurore', type: 'Studio de Design Intérieur', year: '2024' },
-        { name: 'Alpiniste Coffee', type: 'Marque de Café de Spécialité', year: '2024' },
-        { name: 'Atelier Verre', type: 'Artisan Verrier', year: '2023' },
-        { name: 'Nordic Trails', type: 'Agence de Voyages d\'Aventure', year: '2023' },
-        { name: 'Jardin Sonore', type: 'Festival de Musique', year: '2023' }
+        { name: 'La Fournée d\'Or', type: 'Boulangerie artisanale — Aix-en-Provence', year: '2025', desc: 'Un site vitrine chaleureux pour une boulangerie provençale traditionnelle. Commande en ligne et galerie produits.' },
+        { name: 'Le Mas Provençal', type: 'Restaurant gastronomique — Marseille', year: '2025', desc: 'Une présence digitale élégante pour un restaurant gastronomique. Menu en ligne, réservations et galerie photo.' },
+        { name: 'Atelier Terre & Feu', type: 'Céramiste artisan — Nice', year: '2024', desc: 'Un portfolio raffiné pour un céramiste. Vitrine d\'atelier, commandes personnalisées et histoire artisanale.' },
+        { name: 'Pizzeria Da Marco', type: 'Pizzeria artisanale — Toulon', year: '2024', desc: 'Un site vibrant pour une pizzeria artisanale. Carte, commande en ligne et avis clients.' }
       ]
     },
     about: {
-      overline: 'QUI SOMMES-NOUS',
-      title: 'Les Architectes',
-      p1: 'WebCairn est né d\'une conviction simple : le web a trop de bruit et pas assez de savoir-faire. Nous sommes une petite équipe de designers et développeurs basée en France, obsédés par les détails.',
-      p2: 'Comme les cairns qui guident les randonneurs dans le brouillard, nous construisons des repères digitaux — des structures simples qui montrent le chemin. Pas de bases de données, pas de systèmes de paiement, pas de complexité inutile. Juste des sites beaux, rapides et utiles.',
-      stat1: { num: '47+', label: 'Projets Livrés' },
+      overline: 'À PROPOS',
+      title: 'Le Bâtisseur',
+      p1: 'Moi c\'est Lilian, 19 ans, développeur web et auto-entrepreneur en région PACA. Passionné par la tech et le design, je crée des sites vitrines qui représentent vraiment les artisans et restaurateurs locaux.',
+      p2: 'Comme un cairn qui guide les randonneurs sur le sentier, je construis des repères digitaux pour votre activité. Pas de complexité inutile — juste des sites beaux, rapides et efficaces qui vous ramènent des clients.',
+      stat1: { num: '10+', label: 'Projets Livrés' },
       stat2: { num: '100%', label: 'Satisfaction Client' },
-      stat3: { num: '< 1s', label: 'Temps de Chargement Moyen' }
+      stat3: { num: '< 48h', label: 'Temps de Réponse' }
+    },
+    pricing: {
+      overline: 'TARIFS',
+      title: 'Tarifs',
+      sub: 'Des tarifs clairs et transparents, adaptés à vos besoins. Chaque formule est personnalisable.',
+      plans: [
+        {
+          name: 'Essentiel',
+          price: '400 – 600€',
+          desc: 'Le départ idéal pour votre présence en ligne.',
+          features: ['Site one-page', 'Design responsive', 'Formulaire de contact', 'SEO de base', 'Intégration Google Maps', 'Livraison en 2 semaines'],
+          cta: 'Choisir Essentiel'
+        },
+        {
+          name: 'Ascension',
+          price: '800 – 1 200€',
+          desc: 'Un site plus complet pour vous démarquer.',
+          features: ['Site multi-pages (jusqu\'à 5)', 'Design personnalisé avancé', 'Galerie photos', 'SEO avancé', 'Intégration réseaux sociaux', 'Livraison en 3–4 semaines'],
+          cta: 'Choisir Ascension'
+        }
+      ],
+      note: 'Tous les prix sont TTC (auto-entrepreneur, TVA non applicable). Paiement en 2 ou 3 fois possible.'
+    },
+    aides: {
+      overline: 'AIDES & FINANCEMENTS',
+      title: 'Réduisez le coût de votre site',
+      sub: 'Des aides existent pour financer votre présence en ligne. Je vous indique les dispositifs disponibles pour votre situation.',
+      items: [
+        {
+          title: 'France Num',
+          desc: 'Le portail officiel de l\'État pour trouver les aides numériques adaptées à votre entreprise. Faites votre diagnostic gratuitement.',
+          amount: 'Variable',
+          link: 'https://www.francenum.gouv.fr/aides-et-financement'
+        },
+        {
+          title: 'Aides-Entreprises.fr',
+          desc: 'Le moteur de recherche officiel qui recense toutes les subventions nationales, régionales et locales auxquelles vous pouvez prétendre.',
+          amount: 'Toutes aides',
+          link: 'https://www.aides-entreprises.fr'
+        },
+        {
+          title: 'CCI Aix-Marseille',
+          desc: 'Votre chambre de commerce locale propose régulièrement des dispositifs d\'accompagnement numérique pour les entreprises des Bouches-du-Rhône.',
+          amount: 'Local',
+          link: 'https://www.cciamp.com'
+        }
+      ],
+      cta: 'VÉRIFIER MON ÉLIGIBILITÉ',
+      ctaLink: 'https://www.francenum.gouv.fr/aides-et-financement',
+      ctaSub: 'Gratuit et sans engagement'
     },
     contact: {
-      overline: 'NOUS CONTACTER',
+      overline: 'CONTACT',
       title: 'Construisons',
-      sub: 'Prêt à planter votre monument sur le web ? Écrivez-nous.',
+      sub: 'Parlez-moi de votre projet et je vous recontacte sous 48h.',
       name: 'Votre Nom',
       email: 'Adresse Email',
-      message: 'Parlez-nous de votre projet',
+      phone: 'Téléphone',
+      activity: 'Votre Activité',
+      activityPlaceholder: 'ex. Boulanger, Restaurateur, Artisan...',
+      message: 'Parlez-moi de votre projet',
       send: 'ENVOYER LE SIGNAL',
       info: 'hello@webcairn.fr'
     },
     footer: {
-      tagline: 'On bâtit des monuments digitaux depuis 2021.',
-      rights: 'Tous droits réservés.'
+      tagline: 'Sites vitrines pour artisans et restaurateurs en PACA.',
+      rights: 'Tous droits réservés.',
+      legal: 'Mentions légales',
+      nav: { services: 'Services', portfolio: 'Réalisations', pricing: 'Tarifs', contact: 'Contact' }
+    },
+    legal: {
+      title: 'Mentions Légales',
+      editor: 'Éditeur du site',
+      editorContent: 'Lilian Valette — EI (Entreprise Individuelle)\nSIRET : XXX XXX XXX XXXXX\nAdresse : Région PACA, France\nEmail : hello@webcairn.fr\nTéléphone : Sur demande',
+      host: 'Hébergement',
+      hostContent: 'Vercel Inc.\n440 N Barranca Ave #4133\nCovina, CA 91723, USA',
+      ip: 'Propriété intellectuelle',
+      ipContent: 'L\'ensemble du contenu de ce site (textes, images, graphismes, logo) est la propriété de Lilian Valette / WebCairn et est protégé par les lois relatives à la propriété intellectuelle. Toute reproduction sans autorisation préalable est interdite.',
+      data: 'Données personnelles & RGPD',
+      dataContent: 'Les données collectées via le formulaire de contact (nom, email, téléphone, message) sont utilisées uniquement pour répondre à votre demande. Aucune donnée n\'est vendue ni partagée avec des tiers. Conformément au RGPD, vous disposez d\'un droit d\'accès, de rectification et de suppression de vos données en contactant hello@webcairn.fr.',
+      cookies: 'Cookies',
+      cookiesContent: 'Ce site n\'utilise pas de cookies de suivi ni d\'outils d\'analyse tiers.',
+      close: 'Fermer'
     }
   }
 };

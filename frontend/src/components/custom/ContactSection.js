@@ -6,14 +6,14 @@ import { toast } from 'sonner';
 
 export const ContactSection = () => {
   const { t } = useLang();
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', activity: '', message: '' });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.success(t.contact.send + ' !', {
       description: 'This is a visual demo — no data was sent.',
     });
-    setForm({ name: '', email: '', message: '' });
+    setForm({ name: '', email: '', phone: '', activity: '', message: '' });
   };
 
   return (
@@ -59,31 +59,61 @@ export const ContactSection = () => {
           transition={{ delay: 0.2 }}
           className="space-y-8"
         >
-          <div>
-            <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">
-              {t.contact.name}
-            </label>
-            <input
-              data-testid="contact-name-input"
-              type="text"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 placeholder:text-muted-foreground/40"
-              placeholder="John Doe"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div>
+              <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">
+                {t.contact.name}
+              </label>
+              <input
+                data-testid="contact-name-input"
+                type="text"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 placeholder:text-muted-foreground/40"
+                placeholder="Jean Dupont"
+              />
+            </div>
+            <div>
+              <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">
+                {t.contact.email}
+              </label>
+              <input
+                data-testid="contact-email-input"
+                type="email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 placeholder:text-muted-foreground/40"
+                placeholder="jean@exemple.fr"
+              />
+            </div>
           </div>
-          <div>
-            <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">
-              {t.contact.email}
-            </label>
-            <input
-              data-testid="contact-email-input"
-              type="email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 placeholder:text-muted-foreground/40"
-              placeholder="john@example.com"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div>
+              <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">
+                {t.contact.phone}
+              </label>
+              <input
+                data-testid="contact-phone-input"
+                type="tel"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 placeholder:text-muted-foreground/40"
+                placeholder="06 12 34 56 78"
+              />
+            </div>
+            <div>
+              <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">
+                {t.contact.activity}
+              </label>
+              <input
+                data-testid="contact-activity-input"
+                type="text"
+                value={form.activity}
+                onChange={(e) => setForm({ ...form, activity: e.target.value })}
+                className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 placeholder:text-muted-foreground/40"
+                placeholder={t.contact.activityPlaceholder}
+              />
+            </div>
           </div>
           <div>
             <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">

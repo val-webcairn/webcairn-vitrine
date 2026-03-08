@@ -1,24 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Globe, Palette, Sparkles, Search } from 'lucide-react';
+import { Globe, Check } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
-
-const icons = [Globe, Palette, Sparkles, Search];
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 80, damping: 20 } }
-};
 
 export const ServicesSection = () => {
   const { t } = useLang();
+  const service = t.services.items[0];
 
   return (
     <section id="services" data-testid="services-section" className="py-24 md:py-32 px-6 md:px-12 lg:px-20">
@@ -43,52 +30,65 @@ export const ServicesSection = () => {
         </motion.h2>
       </div>
 
-      {/* Bento Grid */}
+      {/* Single service — full width card */}
       <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-border"
+        transition={{ type: 'spring', stiffness: 80, damping: 20 }}
+        data-testid="service-card-0"
+        className="group bg-background border border-border p-10 md:p-16 transition-colors duration-500 hover:bg-[hsl(var(--primary))]"
       >
-        {t.services.items.map((item, i) => {
-          const Icon = icons[i];
-          const isLarge = i === 0;
-          const isBottom = i === 3;
-          return (
-            <motion.div
-              key={i}
-              variants={itemVariants}
-              data-testid={`service-card-${i}`}
-              className={`group bg-background p-8 md:p-10 flex flex-col justify-between min-h-[320px] cursor-default transition-colors duration-500 hover:bg-[hsl(var(--primary))] ${
-                isLarge ? 'lg:col-span-2 lg:row-span-2 lg:min-h-[640px]' : ''
-              } ${isBottom ? 'lg:col-span-2' : ''}`}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-[10px] tracking-[0.3em] font-bold text-muted-foreground group-hover:text-[hsl(var(--primary-foreground))]/60 transition-colors duration-500">
-                    {item.tag}
-                  </span>
-                  <Icon
-                    size={isLarge ? 32 : 24}
-                    strokeWidth={1}
-                    className="text-foreground group-hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500"
-                  />
-                </div>
-                <h3 className={`font-['Syne'] font-bold tracking-tight mb-4 group-hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500 ${
-                  isLarge ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'
-                }`}>
-                  {item.title}
-                </h3>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          {/* Left — Title & description */}
+          <div className="flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <span className="text-[10px] tracking-[0.3em] font-bold text-muted-foreground group-hover:text-[hsl(var(--primary-foreground))]/60 transition-colors duration-500">
+                  {service.tag}
+                </span>
+                <Globe
+                  size={32}
+                  strokeWidth={1}
+                  className="text-foreground group-hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500"
+                />
               </div>
-              <p className={`text-muted-foreground group-hover:text-[hsl(var(--primary-foreground))]/80 transition-colors duration-500 leading-relaxed ${
-                isLarge ? 'text-base md:text-lg max-w-md' : 'text-sm'
-              }`}>
-                {item.desc}
-              </p>
-            </motion.div>
-          );
-        })}
+              <h3 className="font-['Syne'] font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight mb-6 group-hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500">
+                {service.title}
+              </h3>
+            </div>
+            <p className="text-base md:text-lg text-muted-foreground group-hover:text-[hsl(var(--primary-foreground))]/80 transition-colors duration-500 leading-relaxed max-w-lg">
+              {service.desc}
+            </p>
+          </div>
+
+          {/* Right — Features list */}
+          <div className="flex flex-col justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {service.features.map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.08 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center border border-[hsl(var(--primary))] group-hover:border-[hsl(var(--primary-foreground))] transition-colors duration-500">
+                    <Check
+                      size={14}
+                      strokeWidth={2}
+                      className="text-[hsl(var(--primary))] group-hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500"
+                    />
+                  </div>
+                  <span className="text-sm md:text-base font-medium text-foreground group-hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500">
+                    {feature}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
       </motion.div>
     </section>
   );

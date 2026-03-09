@@ -3,8 +3,7 @@ import { useLang } from '@/contexts/LanguageContext';
 import { LegalModal } from '@/components/custom/LegalModal';
 
 export const Footer = () => {
-  const { t } = useLang();
-  const [legalOpen, setLegalOpen] = useState(false);
+  const { t, isLegalOpen, setLegalOpen } = useLang();
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -54,7 +53,7 @@ export const Footer = () => {
         </div>
       </footer>
 
-      <LegalModal isOpen={legalOpen} onClose={() => setLegalOpen(false)} />
+      <LegalModal isOpen={isLegalOpen} onClose={() => setLegalOpen(false)} />
     </>
   );
 };

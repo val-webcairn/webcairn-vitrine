@@ -5,15 +5,15 @@ import { useLang } from '@/contexts/LanguageContext';
 import { toast } from 'sonner';
 
 export const ContactSection = () => {
-  const { t } = useLang();
-  const [form, setForm] = useState({ name: '', email: '', phone: '', activity: '', message: '' });
+  const { t, setLegalOpen } = useLang();
+  const [form, setForm] = useState({ name: '', email: '', activity: '', message: '' });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.success(t.contact.send + ' !', {
       description: 'This is a visual demo — no data was sent.',
     });
-    setForm({ name: '', email: '', phone: '', activity: '', message: '' });
+    setForm({ name: '', email: '', activity: '', message: '' });
   };
 
   return (
@@ -87,20 +87,8 @@ export const ContactSection = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <div>
-              <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">
-                {t.contact.phone}
-              </label>
-              <input
-                data-testid="contact-phone-input"
-                type="tel"
-                value={form.phone}
-                onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 placeholder:text-muted-foreground/40"
-                placeholder="06 12 34 56 78"
-              />
-            </div>
+
+          <div className="grid grid-cols-1 gap-8">
             <div>
               <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">
                 {t.contact.activity}
@@ -128,14 +116,25 @@ export const ContactSection = () => {
               placeholder="..."
             />
           </div>
-          <button
-            data-testid="contact-submit-button"
-            type="submit"
-            className="group flex items-center gap-3 px-10 py-5 bg-foreground text-background font-bold text-sm tracking-[0.2em] uppercase hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))] transition-all duration-500"
-          >
-            {t.contact.send}
-            <Send size={16} strokeWidth={1.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-          </button>
+          <div>
+            <button
+              data-testid="contact-submit-button"
+              type="submit"
+              className="group flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-5 bg-foreground text-background font-bold text-sm tracking-[0.2em] uppercase hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))] transition-all duration-500"
+            >
+              {t.contact.send}
+              <Send size={16} strokeWidth={1.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+            </button>
+            <p className="mt-4 text-xs text-muted-foreground text-left sm:max-w-md leading-relaxed">
+              {t.contact.gdprText}
+              <a href="#" className="underline hover:text-foreground transition-colors" onClick={(e) => {
+                e.preventDefault();
+                setLegalOpen(true);
+              }}>
+                {t.contact.gdprLink}
+              </a>
+            </p>
+          </div>
         </motion.form>
 
         {/* Right side info */}
@@ -144,32 +143,27 @@ export const ContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="flex flex-col justify-between"
+          className="flex flex-col justify-start"
         >
           <div>
             <p className="text-muted-foreground text-sm mb-2 tracking-wider uppercase">Email</p>
             <a
               data-testid="contact-email-link"
-              href="mailto:hello@webcairn.fr"
+              href="mailto:contact@webcairn.fr"
               className="font-['Syne'] font-bold text-2xl md:text-3xl tracking-tight hover:text-[hsl(var(--primary))] transition-colors duration-300"
             >
               {t.contact.info}
             </a>
           </div>
-          <div className="mt-12">
+          <div className="mt-10">
             <p className="text-muted-foreground text-sm mb-2 tracking-wider uppercase">Web</p>
             <span className="font-['Syne'] font-bold text-2xl md:text-3xl tracking-tight">
               webcairn.fr
             </span>
           </div>
-          <div className="mt-12">
-            {/* Large decorative text */}
-            <span className="font-['Syne'] font-extrabold text-7xl md:text-8xl lg:text-9xl tracking-tighter text-foreground/[0.04] select-none leading-none">
-              &rarr;
-            </span>
-          </div>
+
         </motion.div>
-      </div>
-    </section>
+      </div >
+    </section >
   );
 };

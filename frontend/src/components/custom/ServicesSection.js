@@ -87,6 +87,22 @@ export const ServicesSection = () => {
                 </motion.div>
               ))}
             </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+              className="mt-8 flex justify-end"
+            >
+              <button
+                onClick={() => {
+                  document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-sm md:text-base font-medium tracking-wide text-foreground group-hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500 hover:opacity-70 group-hover:hover:opacity-70"
+              >
+                {t.services.link}
+              </button>
+            </motion.div>
           </div>
         </div>
       </motion.div>

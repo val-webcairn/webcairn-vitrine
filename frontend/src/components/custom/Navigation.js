@@ -24,7 +24,6 @@ export const Navigation = () => {
   const navLinks = [
     { id: 'services', label: t.nav.services },
     { id: 'portfolio', label: t.nav.portfolio },
-    { id: 'about', label: t.nav.about },
     { id: 'pricing', label: t.nav.pricing },
     { id: 'aides', label: t.nav.aides },
     { id: 'contact', label: t.nav.contact },
@@ -38,8 +37,8 @@ export const Navigation = () => {
         animate={{ y: 0 }}
         transition={{ type: 'spring', stiffness: 80, damping: 20 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-            ? 'bg-background/80 backdrop-blur-xl border-b border-border/50'
-            : 'bg-transparent'
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border/50'
+          : 'bg-transparent'
           }`}
       >
         <div className="w-full px-6 md:px-12 lg:px-20 py-4 flex items-center justify-between">

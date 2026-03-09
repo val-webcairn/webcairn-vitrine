@@ -6,7 +6,6 @@ import { Navigation } from "@/components/custom/Navigation";
 import { HeroSection } from "@/components/custom/HeroSection";
 import { ServicesSection } from "@/components/custom/ServicesSection";
 import { PortfolioSection } from "@/components/custom/PortfolioSection";
-import { AboutSection } from "@/components/custom/AboutSection";
 import { PricingSection } from "@/components/custom/PricingSection";
 import { AidesSection } from "@/components/custom/AidesSection";
 import { ContactSection } from "@/components/custom/ContactSection";
@@ -23,7 +22,6 @@ function App() {
             <HeroSection />
             <ServicesSection />
             <PortfolioSection />
-            <AboutSection />
             <PricingSection />
             <AidesSection />
             <ContactSection />

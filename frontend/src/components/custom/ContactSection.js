@@ -25,14 +25,14 @@ export const ContactSection = () => {
       body: encode({ "form-name": "contact", ...form }),
     })
       .then(() => {
-        toast.success(t.contact.send + ' !', {
-          description: 'Votre message a bien été envoyé.',
+        toast.success(t.contact.successTitle, {
+          description: t.contact.successDesc,
         });
         setForm({ name: '', email: '', activity: '', message: '' });
       })
       .catch((error) => {
-        toast.error("Erreur d'envoi", {
-          description: "Une erreur s'est produite lors de l'envoi de votre message.",
+        toast.error(t.contact.errorTitle, {
+          description: t.contact.errorDesc,
         });
       })
       .finally(() => {

@@ -94,6 +94,10 @@ const translations = {
       activityPlaceholder: 'e.g. Baker, Restaurant, Craftsman...',
       message: 'Tell me about your project',
       send: 'Send my request',
+      successTitle: 'Message sent!',
+      successDesc: 'Your message has been successfully sent.',
+      errorTitle: 'Error sending',
+      errorDesc: 'An error occurred while sending your message.',
       info: 'contact@webcairn.fr',
       gdprText: 'Your data is used solely to respond to your request. See our ',
       gdprLink: 'Legal Notice'
@@ -212,6 +216,10 @@ const translations = {
       activityPlaceholder: 'ex. Boulanger, Restaurateur, Artisan...',
       message: 'Parlez-moi de votre projet',
       send: 'Envoyer ma demande',
+      successTitle: 'Message envoyé !',
+      successDesc: 'Votre message a bien été envoyé.',
+      errorTitle: 'Erreur d\'envoi',
+      errorDesc: 'Une erreur s\'est produite lors de l\'envoi de votre message.',
       info: 'contact@webcairn.fr',
       gdprText: 'Vos données sont utilisées uniquement pour répondre à votre demande. Voir nos ',
       gdprLink: 'Mentions légales'

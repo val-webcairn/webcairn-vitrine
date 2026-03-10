@@ -7,13 +7,37 @@ import { toast } from 'sonner';
 export const ContactSection = () => {
   const { t, setLegalOpen } = useLang();
   const [form, setForm] = useState({ name: '', email: '', activity: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const encode = (data) => {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success(t.contact.send + ' !', {
-      description: 'This is a visual demo — no data was sent.',
-    });
-    setForm({ name: '', email: '', activity: '', message: '' });
+    setIsSubmitting(true);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...form }),
+    })
+      .then(() => {
+        toast.success(t.contact.send + ' !', {
+          description: 'Votre message a bien été envoyé.',
+        });
+        setForm({ name: '', email: '', activity: '', message: '' });
+      })
+      .catch((error) => {
+        toast.error("Erreur d'envoi", {
+          description: "Une erreur s'est produite lors de l'envoi de votre message.",
+        });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -52,6 +76,8 @@ export const ContactSection = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
         <motion.form
           data-testid="contact-form"
+          name="contact"
+          data-netlify="true"
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -120,9 +146,10 @@ export const ContactSection = () => {
             <button
               data-testid="contact-submit-button"
               type="submit"
-              className="group flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-5 bg-foreground text-background font-bold text-sm tracking-[0.2em] uppercase hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))] transition-all duration-500"
+              disabled={isSubmitting}
+              className={`group flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-5 bg-foreground text-background font-bold text-sm tracking-[0.2em] uppercase transition-all duration-500 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))]'}`}
             >
-              {t.contact.send}
+              {isSubmitting ? 'Envoi...' : t.contact.send}
               <Send size={16} strokeWidth={1.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
             </button>
             <p className="mt-4 text-xs text-muted-foreground text-left sm:max-w-md leading-relaxed">

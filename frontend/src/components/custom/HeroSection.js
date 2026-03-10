@@ -18,7 +18,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Large background number */}
-      <div className="absolute top-16 right-6 md:right-20 text-[15rem] md:text-[25rem] lg:text-[20rem] font-['Syne'] font-extrabold leading-none text-foreground opacity-[0.03] select-none pointer-events-none">
+      <div aria-hidden="true" className="absolute top-16 right-6 md:right-20 text-[15rem] md:text-[25rem] lg:text-[20rem] font-['Syne'] font-extrabold leading-none text-foreground opacity-[0.03] select-none pointer-events-none">
         W
       </div>
 

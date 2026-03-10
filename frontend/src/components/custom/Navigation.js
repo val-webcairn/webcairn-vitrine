@@ -78,6 +78,7 @@ export const Navigation = () => {
             <button
               data-testid="theme-toggle"
               onClick={toggleTheme}
+              aria-label="Toggle theme"
               className="p-2 border border-border hover:border-foreground transition-all duration-300"
             >
               {theme === 'light' ? <Moon size={16} strokeWidth={1.5} /> : <Sun size={16} strokeWidth={1.5} />}
@@ -85,6 +86,7 @@ export const Navigation = () => {
             <button
               data-testid="mobile-menu-toggle"
               onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle mobile menu"
               className="md:hidden p-2 border border-border hover:border-foreground transition-all duration-300"
             >
               {mobileOpen ? <X size={16} strokeWidth={1.5} /> : <Menu size={16} strokeWidth={1.5} />}

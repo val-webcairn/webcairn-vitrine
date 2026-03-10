@@ -75,13 +75,13 @@ export const PricingSection = () => {
 
                         {/* Top */}
                         <div>
-                            <span className="text-[10px] tracking-[0.3em] font-bold text-muted-foreground group-hover:text-[hsl(var(--primary-foreground))]/60 transition-colors duration-500 block mb-6">
+                            <h3 className="text-[10px] tracking-[0.3em] font-bold text-muted-foreground group-hover:text-[hsl(var(--primary-foreground))]/60 transition-colors duration-500 block mb-6">
                                 {plan.name.toUpperCase()}
-                            </span>
+                            </h3>
                             <div className="mb-4">
-                                <span className="font-['Syne'] font-extrabold text-3xl md:text-4xl tracking-tighter group-hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500">
+                                <p className="font-['Syne'] font-extrabold text-3xl md:text-4xl tracking-tighter group-hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500">
                                     {plan.price}
-                                </span>
+                                </p>
                             </div>
                             <p className="text-sm text-muted-foreground group-hover:text-[hsl(var(--primary-foreground))]/70 transition-colors duration-500 mb-8">
                                 {plan.desc}

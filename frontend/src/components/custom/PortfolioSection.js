@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { motion, useScroll, useTransform, useAnimationFrame } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { ArrowUpRight, MoveRight } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
 
@@ -12,97 +12,39 @@ const projectImages = [
 
 export const PortfolioSection = () => {
   const { t } = useLang();
-  const containerRef = useRef(null);
-  const carouselRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const offsetX = useRef(0);
-  const dragStartX = useRef(0);
-  const dragOffsetAtStart = useRef(0);
-  const singleSetWidth = useRef(0);
-  const animationSpeed = 0.5; // pixels per frame
+  const scrollRef = useRef(null);
+  const [isInteracting, setIsInteracting] = useState(false);
 
-  // We triple the projects array for seamless infinite loop
-  const tripleProjects = [...t.portfolio.projects, ...t.portfolio.projects, ...t.portfolio.projects];
-  const tripleImages = [...projectImages, ...projectImages, ...projectImages];
+  // Triple projects arrays to allow a long seamless continuous scroll
+  const displayProjects = [...t.portfolio.projects, ...t.portfolio.projects, ...t.portfolio.projects];
+  const displayImages = [...projectImages, ...projectImages, ...projectImages];
 
-  // Measure one set width
+  // Auto-scroll logic
   useEffect(() => {
-    const measure = () => {
-      if (carouselRef.current) {
-        // Total scroll width divided by 3 sets = one set
-        singleSetWidth.current = carouselRef.current.scrollWidth / 3;
+    let animationId;
+    let accum = 0;
+
+    const scroll = () => {
+      if (!isInteracting && scrollRef.current) {
+        accum += 0.8; // pixels per frame
+        if (accum >= 1) {
+          scrollRef.current.scrollLeft += Math.floor(accum);
+          accum -= Math.floor(accum);
+        }
       }
+      animationId = window.requestAnimationFrame(scroll);
     };
-    measure();
-    const timeout = setTimeout(measure, 500);
-    window.addEventListener('resize', measure);
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener('resize', measure);
-    };
-  }, [t.portfolio.projects]);
 
-  // Continuous animation loop
-  useAnimationFrame(() => {
-    if (isDragging || isHovered || singleSetWidth.current === 0) return;
+    animationId = window.requestAnimationFrame(scroll);
+    return () => window.cancelAnimationFrame(animationId);
+  }, [isInteracting]);
 
-    offsetX.current -= animationSpeed;
-
-    // When scrolled past one full set, jump back seamlessly
-    if (Math.abs(offsetX.current) >= singleSetWidth.current) {
-      offsetX.current += singleSetWidth.current;
+  // Pause the scroll permanently when the user interacts
+  const handleInteraction = () => {
+    if (!isInteracting) {
+      setIsInteracting(true);
     }
-    // If dragged to positive territory, wrap forward
-    if (offsetX.current > 0) {
-      offsetX.current -= singleSetWidth.current;
-    }
-
-    if (carouselRef.current) {
-      carouselRef.current.style.transform = `translateX(${offsetX.current}px)`;
-    }
-  });
-
-  // Drag handlers
-  const handlePointerDown = useCallback((e) => {
-    setIsDragging(true);
-    dragStartX.current = e.clientX;
-    dragOffsetAtStart.current = offsetX.current;
-    if (containerRef.current) {
-      containerRef.current.setPointerCapture(e.pointerId);
-    }
-  }, []);
-
-  const handlePointerMove = useCallback((e) => {
-    if (!isDragging) return;
-    const dx = e.clientX - dragStartX.current;
-    offsetX.current = dragOffsetAtStart.current + dx;
-
-    // Wrap around during drag
-    if (singleSetWidth.current > 0) {
-      if (Math.abs(offsetX.current) >= singleSetWidth.current) {
-        offsetX.current += singleSetWidth.current;
-        dragOffsetAtStart.current += singleSetWidth.current;
-      }
-      if (offsetX.current > 0) {
-        offsetX.current -= singleSetWidth.current;
-        dragOffsetAtStart.current -= singleSetWidth.current;
-      }
-    }
-
-    if (carouselRef.current) {
-      carouselRef.current.style.transform = `translateX(${offsetX.current}px)`;
-    }
-  }, [isDragging]);
-
-  const handlePointerUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start']
-  });
+  };
 
   return (
     <section id="portfolio" data-testid="portfolio-section" className="py-16 md:py-20 overflow-hidden">
@@ -138,49 +80,60 @@ export const PortfolioSection = () => {
         </div>
       </div>
 
-      {/* Infinite horizontal scroll projects */}
-      <div
-        ref={containerRef}
-        className="cursor-grab active:cursor-grabbing select-none"
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+      {/* Horizontal scroll projects */}
+      <div className="w-full mt-12 md:mt-24 pb-8 relative">
+        <style>{`
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
         <div
-          ref={carouselRef}
-          className="flex gap-6 px-6 md:px-12 lg:px-20 w-max will-change-transform"
-          style={{ transform: `translateX(${offsetX.current}px)` }}
+          ref={scrollRef}
+          onPointerDown={handleInteraction}
+          onTouchStart={handleInteraction}
+          onWheel={handleInteraction}
+          className="flex gap-6 px-6 md:px-12 lg:px-20 overflow-x-auto hide-scrollbar"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {tripleProjects.map((project, i) => (
+          {displayProjects.map((project, i) => (
             <motion.div
               key={i}
               onClick={() => {
-                if (!isDragging && project.link) {
+                handleInteraction();
+                if (project.link) {
                   window.open(project.link, '_blank', 'noopener,noreferrer');
                 }
               }}
-              data-testid={`portfolio-project-${i % t.portfolio.projects.length}`}
+              data-testid={`portfolio-project-card-${i}`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: (i % t.portfolio.projects.length) * 0.1 }}
-              className={`group flex-shrink-0 w-[300px] sm:w-[350px] md:w-[450px] ${project.link ? 'cursor-pointer' : ''}`}
+              transition={{ delay: (i % 4) * 0.1 }}
+              className={`group flex-shrink-0 w-[85vw] sm:w-[350px] md:w-[450px] ${project.link ? 'cursor-pointer' : ''}`}
             >
               {/* Image */}
               <div className="relative overflow-hidden aspect-[4/5] mb-5 pointer-events-none rounded-sm">
                 <img
-                  src={tripleImages[i]}
+                  src={displayImages[i]}
                   alt={project.name}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   draggable={false}
                 />
                 <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-all duration-500" />
-                <div className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center border border-background/30 text-background opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm">
-                  <ArrowUpRight size={16} strokeWidth={1.5} />
-                </div>
+
+                {/* External Link Icon */}
+                {project.link && (
+                  <div className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center border border-background/30 text-background opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm">
+                    <ArrowUpRight size={16} strokeWidth={1.5} />
+                  </div>
+                )}
+
+                {/* Fictitious Badge */}
+                {project.badge && (
+                  <div className="absolute top-4 left-4 px-3 py-1.5 bg-background/95 text-foreground text-[9px] uppercase font-extrabold tracking-[0.2em] backdrop-blur-md rounded-sm border border-border pointer-events-auto">
+                    {project.badge}
+                  </div>
+                )}
               </div>
 
               {/* Info */}
@@ -202,8 +155,6 @@ export const PortfolioSection = () => {
           ))}
         </div>
       </div>
-
-
     </section>
   );
 };

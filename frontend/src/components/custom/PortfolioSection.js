@@ -157,12 +157,17 @@ export const PortfolioSection = () => {
           {tripleProjects.map((project, i) => (
             <motion.div
               key={i}
+              onClick={() => {
+                if (!isDragging && project.link) {
+                  window.open(project.link, '_blank', 'noopener,noreferrer');
+                }
+              }}
               data-testid={`portfolio-project-${i % t.portfolio.projects.length}`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: (i % t.portfolio.projects.length) * 0.1 }}
-              className="group flex-shrink-0 w-[300px] sm:w-[350px] md:w-[450px]"
+              className={`group flex-shrink-0 w-[300px] sm:w-[350px] md:w-[450px] ${project.link ? 'cursor-pointer' : ''}`}
             >
               {/* Image */}
               <div className="relative overflow-hidden aspect-[4/5] mb-5 pointer-events-none rounded-sm">

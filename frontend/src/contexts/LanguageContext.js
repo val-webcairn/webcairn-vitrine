@@ -28,7 +28,7 @@ const translations = {
       title: 'Portfolio',
       projects: [
         { name: 'La Fournée d\'Or', type: 'Artisan Bakery — Aix-en-Provence', year: '2025', desc: 'A warm, inviting showcase site for a traditional Provençal bakery. Online ordering and product gallery.' },
-        { name: 'Le Mas Provençal', type: 'Gourmet Restaurant — Marseille', year: '2025', desc: 'An elegant digital presence for a fine dining restaurant. Online menu, reservations, and photo gallery.' },
+        { name: 'Le Mas Provençal', type: 'Gourmet Restaurant — Marseille', year: '2025', desc: 'An elegant digital presence for a fine dining restaurant. Online menu, reservations, and photo gallery.', link: 'https://lemasprovencal.netlify.app/' },
         { name: 'Atelier Terre & Feu', type: 'Ceramic Artisan — Nice', year: '2024', desc: 'A refined portfolio for a ceramist. Workshop showcase, custom orders, and artisan story.' },
         { name: 'Pizzeria Da Marco', type: 'Artisan Pizzeria — Toulon', year: '2024', desc: 'A vibrant site for an artisan pizzeria. Menu, online ordering, and customer reviews.' }
       ]
@@ -150,7 +150,7 @@ const translations = {
       title: 'Portfolio',
       projects: [
         { name: 'La Fournée d\'Or', type: 'Boulangerie artisanale — Aix-en-Provence', year: '2025', desc: 'Un site vitrine chaleureux pour une boulangerie provençale traditionnelle. Commande en ligne et galerie produits.' },
-        { name: 'Le Mas Provençal', type: 'Restaurant gastronomique — Marseille', year: '2025', desc: 'Une présence digitale élégante pour un restaurant gastronomique. Menu en ligne, réservations et galerie photo.' },
+        { name: 'Le Mas Provençal', type: 'Restaurant gastronomique — Marseille', year: '2025', desc: 'Une présence digitale élégante pour un restaurant gastronomique. Menu en ligne, réservations et galerie photo.', link: 'https://lemasprovencal.netlify.app/' },
         { name: 'Atelier Terre & Feu', type: 'Céramiste artisan — Nice', year: '2024', desc: 'Un portfolio raffiné pour un céramiste. Vitrine d\'atelier, commandes personnalisées et histoire artisanale.' },
         { name: 'Pizzeria Da Marco', type: 'Pizzeria artisanale — Toulon', year: '2024', desc: 'Un site vibrant pour une pizzeria artisanale. Carte, commande en ligne et avis clients.' }
       ]

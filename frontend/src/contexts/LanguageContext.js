@@ -111,7 +111,7 @@ const translations = {
     legal: {
       title: 'Legal Notice',
       editor: 'Website Editor',
-      editorContent: 'Lilian Valette — Micro-entreprise (Individual Entrepreneur)\nSIRET: Registration in progress\nCommercial Name: WebCairn\nAddress: 139 Bis Chemin de la Bonde, 13120 Gardanne, France\nEmail: contact@webcairn.fr\nPublication Director: Lilian Valette\nVAT not applicable — art. 293 B of CGI (basic exemption)',
+      editorContent: 'Lilian Valette — Micro-entreprise (Individual Entrepreneur)\nSIRET: 10201852000019\nCommercial Name: WebCairn\nAddress: 139 Bis Chemin de la Bonde, 13120 Gardanne, France\nEmail: contact@webcairn.fr\nPublication Director: Lilian Valette\nVAT not applicable — art. 293 B of CGI (basic exemption)',
       host: 'Hosting',
       hostContent: 'Netlify, Inc.\n512 2nd Street, Suite 200\nSan Francisco, CA 94107, USA\nhttps://www.netlify.com',
       ip: 'Intellectual Property',
@@ -233,7 +233,7 @@ const translations = {
     legal: {
       title: 'Mentions Légales',
       editor: 'Éditeur du site',
-      editorContent: 'Lilian Valette — Micro-entreprise (Entrepreneur Individuel)\nSIRET : En cours d\'immatriculation\nNom commercial : WebCairn\nAdresse : 139 Bis Chemin de la Bonde, 13120 Gardanne, France\nEmail : contact@webcairn.fr\nDirecteur de la publication : Lilian Valette\nTVA non applicable — art. 293 B du CGI (franchise en base)',
+      editorContent: 'Lilian Valette — Micro-entreprise (Entrepreneur Individuel)\nSIRET : 10201852000019\nNom commercial : WebCairn\nAdresse : 139 Bis Chemin de la Bonde, 13120 Gardanne, France\nEmail : contact@webcairn.fr\nDirecteur de la publication : Lilian Valette\nTVA non applicable — art. 293 B du CGI (franchise en base)',
       host: 'Hébergement',
       hostContent: 'Netlify, Inc.\n512 2nd Street, Suite 200\nSan Francisco, CA 94107, USA\nhttps://www.netlify.com',
       ip: 'Propriété intellectuelle',

@@ -3,12 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useLang } from '@/contexts/LanguageContext';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const Navigation = () => {
   const { theme, toggleTheme } = useTheme();
   const { lang, toggleLang, t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -17,7 +20,11 @@ export const Navigation = () => {
   }, []);
 
   const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname !== '/') {
+      navigate(`/#${id}`);
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }
     setMobileOpen(false);
   };
 
@@ -45,7 +52,10 @@ export const Navigation = () => {
           {/* Logo */}
           <button
             data-testid="nav-logo"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => {
+              if (location.pathname !== '/') navigate('/');
+              else window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className="font-['Syne'] font-extrabold text-xl tracking-tight text-foreground hover:text-[hsl(var(--primary))] transition-colors duration-300"
           >
             Web<span className="text-[hsl(var(--primary))]">Cairn</span>

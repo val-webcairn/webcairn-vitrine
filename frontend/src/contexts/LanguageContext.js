@@ -41,20 +41,34 @@ const translations = {
       plans: [
         {
           name: 'Essential',
-          price: '400 – 600€',
+          price: '490 €',
           desc: 'The ideal start for your online presence.',
-          features: ['One-page website', 'Responsive design', 'Contact form', 'Basic SEO', 'Google Maps integration', 'GDPR compliant site & legal notices included', 'Delivery in 2 weeks'],
+          features: ['One-page website', 'Responsive design', 'Contact form', 'Google Maps integration', 'GDPR compliance', 'Basic SEO', 'Delivery in 2 weeks'],
           cta: 'Choose Essential'
         },
         {
           name: 'Ascension',
-          price: '800 – 1 200€',
+          price: '990 €',
           desc: 'A more complete site to stand out.',
-          features: ['Multi-page site (up to 5)', 'Advanced custom design', 'Photo gallery', 'Advanced SEO', 'Social media integration', 'Delivery in 3–4 weeks'],
+          features: ['Multi-page site (up to 5)', 'Advanced custom design', 'Photo gallery', 'Social media integration', 'GDPR compliance', 'Advanced SEO', 'Delivery in 3–4 weeks'],
           cta: 'Choose Ascension'
         }
       ],
-      note: 'All prices are tax-inclusive (auto-entrepreneur, VAT-exempt).'
+      note: 'All prices are tax-inclusive (auto-entrepreneur, VAT-exempt).',
+      addonsTitle: 'ADDITIONAL EXTRAS & ADD-ONS',
+      viewAllBtn: 'View complete options & prices',
+      addons: [
+        { name: 'Additional Page', desc: 'Beyond the chosen package, per extra page', price: '120 €' },
+        { name: 'Photo Gallery', desc: 'For the Essential package — professional lightbox gallery', price: '180 €' },
+        { name: 'Customer Reviews Section', desc: 'Google reviews or formatted client testimonials', price: '150 €' },
+        { name: 'Restaurant Menu', desc: 'Menu page with sections, descriptions, and prices', price: '200 €' },
+        { name: 'Online Booking', desc: 'Reservation widget integration (Calendly, etc.)', price: '120 €' },
+        { name: 'Promotional Banner', desc: 'News banner or easily modifiable special offer', price: '90 €' },
+        { name: 'Presentation Video', desc: 'YouTube / Vimeo video integration on the homepage', price: '80 €' },
+        { name: 'Multilingual (2 languages)', desc: 'FR + EN version or any other language', price: '350 €' },
+        { name: 'Content Writing', desc: 'Complete writing of all website localized texts by us', price: '300 €' },
+        { name: 'Light / Dark Theme', desc: 'Design with automatic/manual Dark Mode toggle', price: '150 €' }
+      ]
     },
     aides: {
       overline: 'GRANTS & FUNDING',
@@ -163,20 +177,34 @@ const translations = {
       plans: [
         {
           name: 'Essentiel',
-          price: '400 – 600€',
+          price: '490 €',
           desc: 'Le départ idéal pour votre présence en ligne.',
-          features: ['Site one-page', 'Design responsive', 'Formulaire de contact', 'SEO de base', 'Intégration Google Maps', 'Site conforme RGPD & mentions légales incluses', 'Livraison en 2 semaines'],
+          features: ['Site one-page', 'Design responsive', 'Formulaire de contact', 'Intégration Google Maps', 'Conformité RGPD', 'SEO de base', 'Livraison en 2 semaines'],
           cta: 'Choisir Essentiel'
         },
         {
           name: 'Ascension',
-          price: '800 – 1 200€',
+          price: '990 €',
           desc: 'Un site plus complet pour vous démarquer.',
-          features: ['Site multi-pages (jusqu\'à 5)', 'Design personnalisé avancé', 'Galerie photos', 'SEO avancé', 'Intégration réseaux sociaux', 'Livraison en 3–4 semaines'],
+          features: ['Site multi-pages (jusqu\'à 5)', 'Design personnalisé avancé', 'Galerie photos', 'Intégration réseaux sociaux', 'Conformité RGPD', 'SEO avancé', 'Livraison en 3–4 semaines'],
           cta: 'Choisir Ascension'
         }
       ],
-      note: 'Tous les prix sont TTC (auto-entrepreneur, TVA non applicable).'
+      note: 'Tous les prix sont TTC (auto-entrepreneur, TVA non applicable).',
+      addonsTitle: 'OPTIONS À LA CARTE — SUPPLÉMENTS',
+      viewAllBtn: 'Voir la liste complète des prix et options',
+      addons: [
+        { name: 'Page supplémentaire', desc: 'Au-delà du forfait choisi, par page additionnelle', price: '120 €' },
+        { name: 'Galerie photos', desc: 'Pour le forfait Essentiel — galerie avec lightbox professionnelle', price: '180 €' },
+        { name: 'Section avis clients', desc: 'Avis Google ou témoignages clients mis en forme', price: '150 €' },
+        { name: 'Menu / carte restaurant', desc: 'Page carte avec sections, descriptions et tarifs', price: '200 €' },
+        { name: 'Réservation en ligne', desc: 'Intégration d\'un widget de réservation (Calendly, etc.)', price: '120 €' },
+        { name: 'Bandeau promotionnel', desc: 'Bannière d\'actualité ou offre spéciale facilement modifiable', price: '90 €' },
+        { name: 'Vidéo de présentation', desc: 'Intégration d\'une vidéo YouTube / Vimeo en page d\'accueil', price: '80 €' },
+        { name: 'Multilingue (2 langues)', desc: 'Version FR + EN ou toute autre langue', price: '350 €' },
+        { name: 'Rédaction des contenus', desc: 'Rédaction complète de tous les textes du site par nos soins', price: '300 €' },
+        { name: 'Thème Clair / Sombre', desc: 'Option de bascule automatique/manuelle du mode inversé', price: '150 €' }
+      ]
     },
     aides: {
       overline: 'AIDES & FINANCEMENTS',

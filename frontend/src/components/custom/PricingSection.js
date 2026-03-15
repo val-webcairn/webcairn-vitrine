@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 
 const containerVariants = {
     hidden: {},
@@ -15,7 +16,7 @@ const itemVariants = {
     visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 80, damping: 20 } }
 };
 
-export const PricingSection = () => {
+export const PricingSection = ({ showLink = false }) => {
     const { t } = useLang();
 
     return (
@@ -103,18 +104,22 @@ export const PricingSection = () => {
                                 ))}
                             </div>
                         </div>
-
-                        {/* CTA */}
-                        <button
-                            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="mt-10 w-full flex items-center justify-center gap-2 px-6 py-4 border border-foreground text-foreground font-bold text-xs tracking-[0.2em] uppercase hover:bg-foreground hover:text-background group-hover:border-[hsl(var(--primary-foreground))] group-hover:text-[hsl(var(--primary-foreground))] group-hover:hover:bg-[hsl(var(--primary-foreground))] group-hover:hover:text-[hsl(var(--primary))] transition-all duration-300"
-                        >
-                            {plan.cta}
-                            <ArrowRight size={14} strokeWidth={1.5} />
-                        </button>
                     </motion.div>
                 ))}
             </motion.div>
+
+            {/* Link to Pricing Page */}
+            {showLink && (
+                <div className="mt-12 flex justify-center">
+                    <Link
+                        to="/tarifs"
+                        className="group flex items-center gap-3 px-8 py-4 bg-foreground text-background font-bold tracking-widest text-sm uppercase hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500"
+                    >
+                        {t.pricing.viewAllBtn}
+                        <ArrowRight size={16} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                </div>
+            )}
 
             {/* Note */}
             <motion.p

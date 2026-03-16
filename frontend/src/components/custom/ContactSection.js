@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 
 export const ContactSection = () => {
   const { t, setLegalOpen } = useLang();
-  const [form, setForm] = useState({ name: '', email: '', activity: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', activity: '', message: '', website: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const encode = (data) => {
@@ -15,22 +15,62 @@ export const ContactSection = () => {
       .join('&');
   };
 
+  const normalizeForm = (data) => ({
+    name: data.name.trim(),
+    email: data.email.trim(),
+    activity: data.activity.trim(),
+    message: data.message.trim(),
+    website: data.website,
+  });
+
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    const normalized = normalizeForm(form);
+
+    // Honeypot field: silently ignore bot submissions.
+    if (normalized.website) {
+      return;
+    }
+
+    if (!normalized.name || !normalized.email || !normalized.message) {
+      toast.error(t.contact.errorTitle, {
+        description: 'Please fill required fields / Merci de remplir les champs obligatoires.',
+      });
+      return;
+    }
+
+    if (!isValidEmail(normalized.email)) {
+      toast.error(t.contact.errorTitle, {
+        description: 'Invalid email address / Adresse email invalide.',
+      });
+      return;
+    }
+
+    if (normalized.message.length < 10) {
+      toast.error(t.contact.errorTitle, {
+        description: 'Message must be at least 10 characters / 10 caracteres minimum.',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...form }),
+      body: encode({ "form-name": "contact", ...normalized }),
     })
       .then(() => {
         toast.success(t.contact.successTitle, {
           description: t.contact.successDesc,
         });
-        setForm({ name: '', email: '', activity: '', message: '' });
+        setForm({ name: '', email: '', activity: '', message: '', website: '' });
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error(t.contact.errorTitle, {
           description: t.contact.errorDesc,
         });
@@ -77,7 +117,9 @@ export const ContactSection = () => {
         <motion.form
           data-testid="contact-form"
           name="contact"
+          method="POST"
           data-netlify="true"
+          data-netlify-honeypot="website"
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,6 +127,13 @@ export const ContactSection = () => {
           transition={{ delay: 0.2 }}
           className="space-y-8"
         >
+          <input type="hidden" name="form-name" value="contact" />
+          <p className="hidden" aria-hidden="true">
+            <label>
+              Do not fill this out if you are human: <input name="website" value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} />
+            </label>
+          </p>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
               <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">
@@ -92,9 +141,14 @@ export const ContactSection = () => {
               </label>
               <input
                 data-testid="contact-name-input"
+                name="name"
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
+                autoComplete="name"
+                required
+                minLength={2}
+                maxLength={120}
                 className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 placeholder:text-muted-foreground/40"
                 placeholder="Jean Dupont"
               />
@@ -105,9 +159,13 @@ export const ContactSection = () => {
               </label>
               <input
                 data-testid="contact-email-input"
+                name="email"
                 type="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
+                autoComplete="email"
+                required
+                maxLength={160}
                 className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 placeholder:text-muted-foreground/40"
                 placeholder="jean@exemple.fr"
               />
@@ -121,9 +179,11 @@ export const ContactSection = () => {
               </label>
               <input
                 data-testid="contact-activity-input"
+                name="activity"
                 type="text"
                 value={form.activity}
                 onChange={(e) => setForm({ ...form, activity: e.target.value })}
+                maxLength={120}
                 className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 placeholder:text-muted-foreground/40"
                 placeholder={t.contact.activityPlaceholder}
               />
@@ -135,9 +195,13 @@ export const ContactSection = () => {
             </label>
             <textarea
               data-testid="contact-message-input"
+              name="message"
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               rows={4}
+              required
+              minLength={10}
+              maxLength={2000}
               className="w-full bg-transparent border-b-2 border-border focus:border-[hsl(var(--primary))] outline-none py-3 text-lg font-medium transition-colors duration-300 resize-none placeholder:text-muted-foreground/40"
               placeholder="..."
             />

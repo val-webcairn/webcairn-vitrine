@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Pages principales
+# - / : Accueil
+# - /pricing : Page de tarification
+
 Sitemap: https://webcairn.fr/sitemap.xml

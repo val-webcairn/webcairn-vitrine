@@ -55,7 +55,10 @@ const translations = {
         }
       ],
       note: 'All prices are tax-inclusive (auto-entrepreneur, VAT-exempt).',
-      addonsTitle: 'ADDITIONAL EXTRAS & ADD-ONS',
+      fromLabel: 'Starting at',
+      addonsTitle: 'ADD-ONS',
+      addonsHeading: 'Options',
+      addonsSub: 'Enhance your package with one or more add-ons. They can be included at the time of your quote or added at any point after your site goes live.',
       viewAllBtn: 'View complete options & prices',
       addons: [
         { name: 'Additional Page', desc: 'Beyond the chosen package, per extra page', price: '120 €' },
@@ -66,9 +69,39 @@ const translations = {
         { name: 'Promotional Banner', desc: 'News banner or easily modifiable special offer', price: '90 €' },
         { name: 'Presentation Video', desc: 'YouTube / Vimeo video integration on the homepage', price: '80 €' },
         { name: 'Multilingual (2 languages)', desc: 'FR + EN version or any other language', price: '350 €' },
-        { name: 'Content Writing', desc: 'Complete writing of all website localized texts by us', price: '300 €' },
         { name: 'Light / Dark Theme', desc: 'Design with automatic/manual Dark Mode toggle', price: '150 €' }
-      ]
+      ],
+      maintenance: {
+        overline: 'MONTHLY MAINTENANCE',
+        heading: 'Maintenance',
+        terms: 'Subscriptions run on an annual basis, billed monthly, and can be cancelled with one month\'s notice before the annual renewal date.',
+        plans: [
+          {
+            name: 'Essential Plan',
+            monthlyPrice: '29 €/month',
+            yearlyPrice: '348 €/year',
+            commitment: '12-month commitment',
+            features: [
+              { title: 'Netlify hosting & domain name', desc: 'Managed by WebCairn — you remain the owner, transferable at any time' },
+              { title: 'Security updates', desc: 'Monitoring and fixes applied regularly' },
+              { title: 'Monthly backups', desc: 'Full website backup every month' },
+              { title: '1 minor update / month', desc: 'Text, photo, opening hours, prices — excluding redesign or new page' }
+            ]
+          },
+          {
+            name: 'Serenity Plan',
+            monthlyPrice: '49 €/month',
+            yearlyPrice: '588 €/year',
+            commitment: '12-month commitment',
+            features: [
+              { title: 'Everything in Essential plan', desc: 'Hosting, domain, security, backups' },
+              { title: 'Weekly backups', desc: 'Full backup every week' },
+              { title: '3 minor updates / month', desc: 'Text, photo, opening hours, prices — excluding redesign or new page' },
+              { title: 'Monthly performance report', desc: 'Traffic, Google positioning, recommendations' }
+            ]
+          }
+        ]
+      }
     },
     aides: {
       overline: 'GRANTS & FUNDING',
@@ -191,7 +224,10 @@ const translations = {
         }
       ],
       note: 'Tous les prix sont TTC (auto-entrepreneur, TVA non applicable).',
-      addonsTitle: 'OPTIONS À LA CARTE — SUPPLÉMENTS',
+      fromLabel: 'À partir de',
+      addonsTitle: 'OPTIONS À LA CARTE',
+      addonsHeading: 'Options',
+      addonsSub: 'Complétez votre forfait avec une ou plusieurs options. Elles s\'ajoutent au moment du devis ou à tout moment après la mise en ligne de votre site.',
       viewAllBtn: 'Voir la liste complète des prix et options',
       addons: [
         { name: 'Page supplémentaire', desc: 'Au-delà du forfait choisi, par page additionnelle', price: '120 €' },
@@ -202,9 +238,39 @@ const translations = {
         { name: 'Bandeau promotionnel', desc: 'Bannière d\'actualité ou offre spéciale facilement modifiable', price: '90 €' },
         { name: 'Vidéo de présentation', desc: 'Intégration d\'une vidéo YouTube / Vimeo en page d\'accueil', price: '80 €' },
         { name: 'Multilingue (2 langues)', desc: 'Version FR + EN ou toute autre langue', price: '350 €' },
-        { name: 'Rédaction des contenus', desc: 'Rédaction complète de tous les textes du site par nos soins', price: '300 €' },
         { name: 'Thème Clair / Sombre', desc: 'Option de bascule automatique/manuelle du mode inversé', price: '150 €' }
-      ]
+      ],
+      maintenance: {
+        overline: 'MAINTENANCE MENSUELLE',
+        heading: 'Maintenance',
+        terms: 'Les abonnements sont souscrits à l\'année, réglés mensuellement, et résiliables avec un préavis d\'un mois avant l\'échéance annuelle.',
+        plans: [
+          {
+            name: 'Plan ESSENTIEL',
+            monthlyPrice: '29 €/mois',
+            yearlyPrice: '348 €/an',
+            commitment: 'Engagement 12 mois',
+            features: [
+              { title: 'Hébergement Netlify & nom de domaine', desc: 'Géré par WebCairn — vous restez propriétaire, transférable à tout moment' },
+              { title: 'Mises à jour de sécurité', desc: 'Surveillance et correctifs appliqués régulièrement' },
+              { title: 'Sauvegardes mensuelles', desc: 'Sauvegarde complète du site chaque mois' },
+              { title: '1 modification mineure / mois', desc: 'Texte, photo, horaires, tarif — hors refonte ou nouvelle page' }
+            ]
+          },
+          {
+            name: 'Plan SÉRÉNITÉ',
+            monthlyPrice: '49 €/mois',
+            yearlyPrice: '588 €/an',
+            commitment: 'Engagement 12 mois',
+            features: [
+              { title: 'Tout le plan Essentiel', desc: 'Hébergement, domaine, sécurité, sauvegardes' },
+              { title: 'Sauvegardes hebdomadaires', desc: 'Sauvegarde complète chaque semaine' },
+              { title: '3 modifications mineures / mois', desc: 'Texte, photo, horaires, tarif — hors refonte ou nouvelle page' },
+              { title: 'Rapport de performance mensuel', desc: 'Fréquentation, positionnement Google, recommandations' }
+            ]
+          }
+        ]
+      }
     },
     aides: {
       overline: 'AIDES & FINANCEMENTS',

@@ -113,7 +113,7 @@ export const PricingSection = ({ showLink = false }) => {
                 <div className="mt-12 flex justify-center">
                     <Link
                         to="/tarifs"
-                        className="group flex items-center gap-3 px-8 py-4 bg-foreground text-background font-bold tracking-widest text-sm uppercase hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500"
+                        className="group flex items-center gap-3 px-8 py-4 bg-black text-white dark:bg-white dark:text-black font-bold tracking-widest text-sm uppercase hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500"
                     >
                         {t.pricing.viewAllBtn}
                         <ArrowRight size={16} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />

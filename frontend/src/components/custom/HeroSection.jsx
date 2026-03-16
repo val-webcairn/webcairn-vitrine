@@ -8,7 +8,7 @@ export const HeroSection = () => {
   const { t } = useLang();
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
-  
+
   // Skip heavy animations on mobile or when reduced motion is preferred
   const shouldSkipAnimations = isMobile || prefersReducedMotion;
 
@@ -24,7 +24,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Large background number */}
-      <div aria-hidden="true" className="absolute top-16 right-6 md:right-20 text-[15rem] md:text-[25rem] lg:text-[20rem] font-['Syne'] font-extrabold leading-none text-foreground opacity-[0.03] select-none pointer-events-none">
+      <div aria-hidden="true" className="hidden md:block absolute top-16 right-6 md:right-20 text-[15rem] md:text-[25rem] lg:text-[20rem] font-['Syne'] font-extrabold leading-none text-foreground opacity-[0.03] select-none pointer-events-none">
         W
       </div>
 
@@ -32,9 +32,9 @@ export const HeroSection = () => {
       <div className="relative z-10 w-full px-6 md:px-12 lg:px-20 lg:pt-[18vh]">
         {/* Overline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={shouldSkipAnimations ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={shouldSkipAnimations ? { duration: 0 } : { delay: 0.2 }}
           className="text-xs md:text-sm tracking-[0.3em] text-muted-foreground font-medium mb-6 md:mb-8"
         >
           {t.hero.overline}
@@ -43,9 +43,9 @@ export const HeroSection = () => {
         {/* Main Headline */}
         <div className="overflow-hidden">
           <motion.h1
-            initial={{ y: 120 }}
+            initial={shouldSkipAnimations ? false : { y: 120 }}
             animate={{ y: 0 }}
-            transition={{ type: 'spring', stiffness: 60, damping: 20, delay: 0.3 }}
+            transition={shouldSkipAnimations ? { duration: 0 } : { type: 'spring', stiffness: 60, damping: 20, delay: 0.3 }}
             className="font-['Syne'] font-extrabold text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] tracking-tighter leading-[0.9] max-w-[16ch]"
           >
             {t.hero.headline}
@@ -55,44 +55,40 @@ export const HeroSection = () => {
         {/* Sub + CTA row */}
         <div className="mt-10 md:mt-16 lg:mt-8 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldSkipAnimations ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
+            transition={shouldSkipAnimations ? { duration: 0 } : { delay: 0.7 }}
             className="text-base md:text-lg text-muted-foreground max-w-md leading-relaxed"
           >
             {t.hero.sub}
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldSkipAnimations ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
+            transition={shouldSkipAnimations ? { duration: 0 } : { delay: 0.9 }}
             className="flex items-center gap-6"
           >
             <button
               data-testid="hero-cta-button"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group px-8 py-4 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] font-bold text-sm tracking-wider uppercase hover:translate-y-[-2px] transition-all duration-300 relative overflow-hidden"
+              className="cta-button"
             >
-              <span className="relative z-10">{t.hero.cta}</span>
-              <span className="absolute inset-0 bg-foreground translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-              <span className="absolute inset-0 z-10 flex items-center justify-center font-bold text-sm tracking-wider uppercase text-background opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                {t.hero.cta}
-              </span>
+              {t.hero.cta}
             </button>
           </motion.div>
         </div>
 
         {/* Scroll indicator */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={shouldSkipAnimations ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
+          transition={shouldSkipAnimations ? { duration: 0 } : { delay: 1.2 }}
           className="mt-16 md:mt-24 lg:mt-10 flex items-center gap-3 text-muted-foreground"
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
+            animate={shouldSkipAnimations ? { y: 0 } : { y: [0, 8, 0] }}
+            transition={shouldSkipAnimations ? { duration: 0 } : { repeat: Infinity, duration: 2 }}
           >
             <ArrowDown size={16} strokeWidth={1.5} />
           </motion.div>
@@ -102,9 +98,9 @@ export const HeroSection = () => {
 
       {/* Right side image / visual */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={shouldSkipAnimations ? false : { opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
+        transition={shouldSkipAnimations ? { duration: 0 } : { delay: 0.5, duration: 1 }}
         className="hidden lg:block absolute top-24 right-12 xl:right-24 w-[320px] xl:w-[400px] h-[480px] xl:h-[560px]"
       >
         <div className="relative w-full h-full">

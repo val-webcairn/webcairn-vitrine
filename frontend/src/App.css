@@ -31,3 +31,37 @@ textarea:focus-visible {
   outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;
 }
+
+/* Unified CTA button style (same behavior as "Voir la liste complete des prix et options") */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2.5rem;
+  background-color: hsl(var(--primary));
+  background-image: linear-gradient(hsl(var(--foreground)), hsl(var(--foreground)));
+  background-size: 100% 0%;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  color: hsl(var(--primary-foreground));
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 300ms ease, background-size 500ms ease, color 300ms ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  background-size: 100% 100%;
+  color: hsl(var(--background));
+}
+
+.cta-button:disabled,
+.cta-button[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}

@@ -32,7 +32,98 @@ const toAsciiLower = (value) =>
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
 
+const waitForCondition = async (condition, timeout = 1500, interval = 25) => {
+  const startedAt = Date.now();
+  while (!condition()) {
+    if (Date.now() - startedAt > timeout) {
+      throw new Error('Timed out while waiting for condition');
+    }
+    await new Promise((resolve) => setTimeout(resolve, interval));
+  }
+};
+
 describe('App critical flows', () => {
+  it('navigates from /tarifs to home section when header link is clicked', async () => {
+    const originalScrollIntoView = Element.prototype.scrollIntoView;
+    const scrollIntoViewMock = vi.fn();
+    Element.prototype.scrollIntoView = scrollIntoViewMock;
+
+    const view = renderWithRoot(
+      <MemoryRouter initialEntries={['/tarifs']}>
+        <App />
+      </MemoryRouter>
+    );
+
+    const servicesLink = view.container.querySelector('[data-testid="nav-link-services"]');
+    expect(servicesLink).toBeTruthy();
+
+    flushSync(() => {
+      servicesLink.click();
+    });
+
+    await waitForCondition(() => scrollIntoViewMock.mock.calls.length > 0, 2000);
+    expect(scrollIntoViewMock).toHaveBeenCalled();
+
+    Element.prototype.scrollIntoView = originalScrollIntoView;
+    view.unmount();
+  });
+
+  it('scrolls to a section when header navigation link is clicked', () => {
+    const originalScrollIntoView = Element.prototype.scrollIntoView;
+    const scrollIntoViewMock = vi.fn();
+    Element.prototype.scrollIntoView = scrollIntoViewMock;
+
+    const view = renderWithRoot(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+
+    const servicesLink = view.container.querySelector('[data-testid="nav-link-services"]');
+    expect(servicesLink).toBeTruthy();
+
+    flushSync(() => {
+      servicesLink.click();
+    });
+
+    expect(scrollIntoViewMock).toHaveBeenCalled();
+
+    Element.prototype.scrollIntoView = originalScrollIntoView;
+    view.unmount();
+  });
+
+  it('opens and closes legal notice modal from footer link', async () => {
+    const view = renderWithRoot(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+
+    const legalLink = view.container.querySelector('[data-testid="legal-link"]');
+    expect(legalLink).toBeTruthy();
+
+    flushSync(() => {
+      legalLink.click();
+    });
+
+    await waitForCondition(() => {
+      return Boolean(view.container.querySelector('button[aria-label="Fermer"], button[aria-label="Close"]'));
+    });
+
+    const closeButton = view.container.querySelector('button[aria-label="Fermer"], button[aria-label="Close"]');
+    expect(closeButton).toBeTruthy();
+
+    flushSync(() => {
+      closeButton.click();
+    });
+
+    await waitForCondition(() => {
+      return !view.container.querySelector('button[aria-label="Fermer"], button[aria-label="Close"]');
+    });
+
+    view.unmount();
+  });
+
   it('opens mobile navigation menu', () => {
     const view = renderWithRoot(
       <MemoryRouter>
@@ -52,11 +143,15 @@ describe('App critical flows', () => {
     view.unmount();
   });
 
-  it('renders pricing route content on /tarifs', () => {
+  it('renders pricing route content on /tarifs', async () => {
     const view = renderWithRoot(
       <MemoryRouter initialEntries={['/tarifs']}>
         <App />
       </MemoryRouter>
+    );
+
+    await waitForCondition(() =>
+      toAsciiLower(view.container.textContent).includes('generer votre devis')
     );
 
     expect(toAsciiLower(view.container.textContent)).toContain('generer votre devis');

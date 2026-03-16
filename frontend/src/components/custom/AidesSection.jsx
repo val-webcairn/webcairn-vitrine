@@ -113,14 +113,12 @@ export const AidesSection = () => {
                     href={t.aides.ctaLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3 px-10 py-5 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] font-bold text-sm tracking-[0.2em] uppercase hover:translate-y-[-2px] transition-all duration-300 relative overflow-hidden no-underline"
+                    className="cta-button group"
                 >
-                    <span className="relative z-10">{t.aides.cta}</span>
-                    <ArrowRight size={16} strokeWidth={1.5} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
-                    <span className="absolute inset-0 bg-foreground translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                    <span className="absolute inset-0 z-10 flex items-center justify-center gap-3 font-bold text-sm tracking-[0.2em] uppercase text-background opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                    <span>{t.aides.cta}</span>
+                    <ArrowRight size={16} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
+                    <span className="sr-only">
                         {t.aides.cta}
-                        <ArrowRight size={16} strokeWidth={1.5} />
                     </span>
                 </a>
                 <p className="mt-4 text-xs text-muted-foreground tracking-wider">{t.aides.ctaSub}</p>

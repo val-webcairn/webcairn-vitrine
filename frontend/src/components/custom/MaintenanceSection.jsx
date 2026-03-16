@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
 
 const containerVariants = {
@@ -25,6 +25,9 @@ const itemVariants = {
 export const MaintenanceSection = () => {
   const { t } = useLang();
   const maintenance = t.pricing.maintenance;
+  const reportPdfUrl = '/documents/Exemple_Rapport_SEO_MasProvencal_Fevrier2026.pdf';
+  const reportExampleText = maintenance.reportExampleText || 'Exemple de rapport mensuel SEO remis aux clients de l\'offre à 49 €/mois.';
+  const reportDownloadLabel = maintenance.reportDownloadLabel || 'Télécharger l\'exemple de rapport';
 
   if (!maintenance) return null;
 
@@ -113,6 +116,26 @@ export const MaintenanceSection = () => {
             </div>
           </motion.article>
         ))}
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.15 }}
+        className="mt-10 max-w-5xl mx-auto border border-border bg-background p-6 md:p-8"
+      >
+        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+          {reportExampleText}
+        </p>
+        <a
+          href={reportPdfUrl}
+          download
+          className="cta-button group mt-5"
+        >
+          {reportDownloadLabel}
+          <ArrowRight size={14} strokeWidth={1.8} />
+        </a>
       </motion.div>
     </section>
   );

@@ -211,7 +211,7 @@ export const ContactSection = () => {
               data-testid="contact-submit-button"
               type="submit"
               disabled={isSubmitting}
-              className={`group flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-5 bg-foreground text-background font-bold text-sm tracking-[0.2em] uppercase transition-all duration-500 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))]'}`}
+              className="cta-button group w-full sm:w-auto"
             >
               {isSubmitting ? 'Envoi...' : t.contact.send}
               <Send size={16} strokeWidth={1.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />

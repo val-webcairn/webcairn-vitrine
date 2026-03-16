@@ -5,16 +5,26 @@ const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('webcairn-theme') || 'light';
+      return localStorage.getItem('webcairn-theme') || 'dark';
     }
-    return 'light';
+    return 'dark';
   });
 
   useEffect(() => {
     const root = document.documentElement;
+    root.classList.add('theme-transitioning');
     root.classList.remove('light', 'dark');
     root.classList.add(theme);
     localStorage.setItem('webcairn-theme', theme);
+
+    const timeoutId = window.setTimeout(() => {
+      root.classList.remove('theme-transitioning');
+    }, 300);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      root.classList.remove('theme-transitioning');
+    };
   }, [theme]);
 
   const toggleTheme = () => {

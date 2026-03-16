@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Menu, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useLang } from '@/contexts/LanguageContext';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -19,11 +17,15 @@ export const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const getSectionTarget = (id) => {
+    return document.getElementById(id) || document.querySelector(`[data-anchor="${id}"]`);
+  };
+
   const scrollTo = (id) => {
     if (location.pathname !== '/') {
       navigate(`/#${id}`);
     } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      getSectionTarget(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     setMobileOpen(false);
   };
@@ -38,11 +40,8 @@ export const Navigation = () => {
 
   return (
     <>
-      <motion.nav
+      <nav
         data-testid="main-navigation"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: 'spring', stiffness: 80, damping: 20 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
           ? 'bg-background/80 backdrop-blur-xl border-b border-border/50'
           : 'bg-transparent'
@@ -81,7 +80,7 @@ export const Navigation = () => {
             <button
               data-testid="lang-toggle"
               onClick={toggleLang}
-              className="px-3 py-1.5 text-xs font-bold tracking-widest border border-border hover:border-foreground transition-all duration-300 uppercase"
+              className="h-8 px-3 text-xs font-bold tracking-widest border border-border hover:border-foreground transition-all duration-300 uppercase"
             >
               {lang === 'en' ? 'FR' : 'EN'}
             </button>
@@ -89,49 +88,41 @@ export const Navigation = () => {
               data-testid="theme-toggle"
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="p-2 border border-border hover:border-foreground transition-all duration-300"
+              className="h-8 w-8 flex items-center justify-center border border-border hover:border-foreground transition-all duration-300"
             >
-              {theme === 'light' ? <Moon size={16} strokeWidth={1.5} /> : <Sun size={16} strokeWidth={1.5} />}
+              {theme === 'light' ? '◐' : '◑'}
             </button>
             <button
               data-testid="mobile-menu-toggle"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle mobile menu"
-              className="md:hidden p-2 border border-border hover:border-foreground transition-all duration-300"
+              className="md:hidden h-8 w-8 flex items-center justify-center border border-border hover:border-foreground transition-all duration-300"
             >
-              {mobileOpen ? <X size={16} strokeWidth={1.5} /> : <Menu size={16} strokeWidth={1.5} />}
+              {mobileOpen ? '✕' : '☰'}
             </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            data-testid="mobile-menu"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-background pt-24 px-6"
-          >
-            <div className="flex flex-col gap-8">
-              {navLinks.map((link, i) => (
-                <motion.button
-                  key={link.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  onClick={() => scrollTo(link.id)}
-                  className="text-4xl font-['Syne'] font-bold tracking-tighter text-left text-foreground hover:text-[hsl(var(--primary))] transition-colors"
-                >
-                  {link.label}
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {mobileOpen && (
+        <div
+          data-testid="mobile-menu"
+          className="fixed inset-0 z-40 bg-background pt-24 px-6"
+        >
+          <div className="flex flex-col gap-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollTo(link.id)}
+                className="text-4xl font-['Syne'] font-bold tracking-tighter text-left text-foreground hover:text-[hsl(var(--primary))] transition-colors"
+              >
+                {link.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 };

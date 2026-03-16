@@ -213,7 +213,7 @@ export const QuoteBuilderSection = () => {
           <div className="mt-8">
             <a
               href={mailtoLink}
-              className="inline-flex items-center justify-center w-full px-8 py-4 bg-black text-white dark:bg-white dark:text-black font-bold tracking-widest text-sm uppercase hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))] transition-colors duration-500"
+              className="cta-button w-full"
             >
               {quote.cta}
             </a>

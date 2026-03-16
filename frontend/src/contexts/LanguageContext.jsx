@@ -100,7 +100,9 @@ const translations = {
               { title: 'Monthly performance report', desc: 'Traffic, Google positioning' }
             ]
           }
-        ]
+        ],
+        reportExampleText: 'Example of the monthly SEO report delivered to clients subscribed to the €49/month plan.',
+        reportDownloadLabel: 'Download sample report'
       },
       quote: {
         overline: 'QUOTE BUILDER',
@@ -285,7 +287,9 @@ const translations = {
               { title: 'Rapport de performance mensuel', desc: 'Fréquentation, positionnement Google' }
             ]
           }
-        ]
+        ],
+        reportExampleText: 'Exemple de rapport SEO mensuel transmis aux clients de l\'offre à 49 €/mois.',
+        reportDownloadLabel: 'Télécharger un exemple de rapport'
       },
       quote: {
         overline: 'GÉNÉRATEUR DE DEVIS',

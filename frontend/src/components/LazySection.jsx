@@ -5,7 +5,7 @@ import React, { useRef, useState, useEffect } from 'react';
  * Uses IntersectionObserver to detect when section enters viewport.
  * Reduces initial JS payload by deferring non-critical sections.
  */
-export const LazySection = ({ children, className = '' }) => {
+export const LazySection = ({ children, className = '', anchorId }) => {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -32,7 +32,7 @@ export const LazySection = ({ children, className = '' }) => {
   }, []);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} data-anchor={anchorId}>
       {isVisible ? children : <div aria-hidden="true" className="h-96" />}
     </div>
   );

@@ -6,7 +6,7 @@ const translations = {
     hero: {
       overline: 'SHOWCASE WEBSITE CREATION',
       headline: 'YOUR SHOWCASE SITE, STONE BY STONE',
-      sub: 'I design and develop showcase websites for artisans and restaurant owners. Clean, fast, memorable — built to last like a cairn.',
+      sub: 'Showcase websites laid stone by stone — solid, visible, built to last.',
       cta: 'Lay the first stone',
       scroll: 'Scroll to explore'
     },
@@ -82,7 +82,7 @@ const translations = {
             yearlyPrice: '348 €/year',
             commitment: '12-month commitment',
             features: [
-              { title: 'Netlify hosting & domain name', desc: 'Managed by WebCairn — you remain the owner, transferable at any time' },
+              { title: 'Hosting & domain name', desc: 'Managed by WebCairn — you remain the owner, transferable at any time' },
               { title: 'Security updates', desc: 'Monitoring and fixes applied regularly' },
               { title: 'Monthly backups', desc: 'Full website backup every month' },
               { title: '1 minor update / month', desc: 'Text, photo, opening hours, prices — excluding redesign or new page' }
@@ -97,10 +97,26 @@ const translations = {
               { title: 'Everything in Essential plan', desc: 'Hosting, domain, security, backups' },
               { title: 'Weekly backups', desc: 'Full backup every week' },
               { title: '3 minor updates / month', desc: 'Text, photo, opening hours, prices — excluding redesign or new page' },
-              { title: 'Monthly performance report', desc: 'Traffic, Google positioning, recommendations' }
+              { title: 'Monthly performance report', desc: 'Traffic, Google positioning' }
             ]
           }
         ]
+      },
+      quote: {
+        overline: 'QUOTE BUILDER',
+        heading: 'Generate Your Quote',
+        sub: 'Build an initial estimate in a few clicks. This preview is indicative and will be refined during the final personalized quote.',
+        packageLabel: 'Website Package',
+        addonsLabel: 'Add-ons',
+        maintenanceLabel: 'Maintenance Subscription (optional)',
+        noneLabel: 'No maintenance plan',
+        summaryTitle: 'Estimate Summary',
+        selectedLabel: 'Selected items',
+        oneTimeTotalLabel: 'One-time project total',
+        monthlyTotalLabel: 'Estimated monthly total',
+        yearlyTotalLabel: 'Estimated yearly total',
+        cta: 'Request this quote by email',
+        note: 'This estimate is provided for guidance only and does not replace a contractual quote.'
       }
     },
     aides: {
@@ -175,7 +191,7 @@ const translations = {
     hero: {
       overline: 'CRÉATION DE SITES VITRINES',
       headline: 'VOTRE SITE VITRINE, PIERRE APRÈS PIERRE',
-      sub: 'Je conçois et développe des sites vitrines pour artisans et restaurateurs. Clairs, rapides, mémorables — bâtis pour durer comme un cairn.',
+      sub: 'Des sites vitrines posés pierre après pierre — solides, visibles, faits pour durer.',
       cta: 'Poser la première pierre',
       scroll: 'Défilez pour explorer'
     },
@@ -251,7 +267,7 @@ const translations = {
             yearlyPrice: '348 €/an',
             commitment: 'Engagement 12 mois',
             features: [
-              { title: 'Hébergement Netlify & nom de domaine', desc: 'Géré par WebCairn — vous restez propriétaire, transférable à tout moment' },
+              { title: 'Hébergement & nom de domaine', desc: 'Géré par WebCairn — vous restez propriétaire, transférable à tout moment' },
               { title: 'Mises à jour de sécurité', desc: 'Surveillance et correctifs appliqués régulièrement' },
               { title: 'Sauvegardes mensuelles', desc: 'Sauvegarde complète du site chaque mois' },
               { title: '1 modification mineure / mois', desc: 'Texte, photo, horaires, tarif — hors refonte ou nouvelle page' }
@@ -266,10 +282,26 @@ const translations = {
               { title: 'Tout le plan Essentiel', desc: 'Hébergement, domaine, sécurité, sauvegardes' },
               { title: 'Sauvegardes hebdomadaires', desc: 'Sauvegarde complète chaque semaine' },
               { title: '3 modifications mineures / mois', desc: 'Texte, photo, horaires, tarif — hors refonte ou nouvelle page' },
-              { title: 'Rapport de performance mensuel', desc: 'Fréquentation, positionnement Google, recommandations' }
+              { title: 'Rapport de performance mensuel', desc: 'Fréquentation, positionnement Google' }
             ]
           }
         ]
+      },
+      quote: {
+        overline: 'GÉNÉRATEUR DE DEVIS',
+        heading: 'Générer Votre Devis',
+        sub: 'Construisez une première estimation en quelques clics. Cette prévision est indicative et sera affinée lors du devis personnalisé final.',
+        packageLabel: 'Forfait site',
+        addonsLabel: 'Options à la carte',
+        maintenanceLabel: 'Abonnement maintenance (optionnel)',
+        noneLabel: 'Sans abonnement maintenance',
+        summaryTitle: 'Récapitulatif estimatif',
+        selectedLabel: 'Éléments sélectionnés',
+        oneTimeTotalLabel: 'Total projet (paiement unique)',
+        monthlyTotalLabel: 'Total mensuel estimé',
+        yearlyTotalLabel: 'Total annuel estimé',
+        cta: 'Demander ce devis par email',
+        note: 'Cette estimation est fournie à titre indicatif et ne remplace pas un devis contractuel.'
       }
     },
     aides: {

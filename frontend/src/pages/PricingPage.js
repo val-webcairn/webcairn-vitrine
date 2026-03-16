@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { PricingSection } from "@/components/custom/PricingSection";
 import { AddonsSection } from "@/components/custom/AddonsSection";
 import { MaintenanceSection } from "@/components/custom/MaintenanceSection";
+import { QuoteBuilderSection } from "@/components/custom/QuoteBuilderSection";
 
 export const PricingPage = () => {
   useEffect(() => {
@@ -13,6 +14,7 @@ export const PricingPage = () => {
       <PricingSection showLink={false} />
       <AddonsSection />
       <MaintenanceSection />
+      <QuoteBuilderSection />
     </main>
   );
 };

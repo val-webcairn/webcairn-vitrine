@@ -2,7 +2,7 @@
 [build]
   base = "frontend"
   command = "npm run build"
-  publish = "frontend/dist"
+  publish = "dist"
 
 # Redirect rules for React Router SPA
 [[redirects]]

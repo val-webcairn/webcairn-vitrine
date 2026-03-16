@@ -1,0 +1,18 @@
+# Netlify configuration for WebCairn vitrine
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "frontend/dist"
+
+# Redirect rules for React Router SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Node.js version
+[functions]
+  node_bundler = "esbuild"
+
+# Environment variables (if needed)
+# [context.production.environment]

@@ -8,6 +8,7 @@ import { Footer } from "@/components/custom/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { HomePage } from "@/pages/HomePage";
 import { PricingPage } from "@/pages/PricingPage";
+import { useIsMobile } from "@/hooks/useAnimationPrefs";
 
 const ScrollToAnchor = () => {
   const { hash } = useLocation();
@@ -21,10 +22,23 @@ const ScrollToAnchor = () => {
   return null;
 };
 
+const MobileAnimationController = () => {
+  const isMobile = useIsMobile();
+  useEffect(() => {
+    if (isMobile) {
+      document.documentElement.setAttribute("data-mobile-reduced", "true");
+    } else {
+      document.documentElement.removeAttribute("data-mobile-reduced");
+    }
+  }, [isMobile]);
+  return null;
+};
+
 function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
+        <MobileAnimationController />
         <div className="grain-overlay min-h-screen bg-background text-foreground flex flex-col">
           <Navigation />
           <ScrollToAnchor />

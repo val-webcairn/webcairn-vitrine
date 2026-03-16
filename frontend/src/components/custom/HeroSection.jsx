@@ -2,9 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
+import { useReducedMotion, useIsMobile } from '@/hooks/useAnimationPrefs';
 
 export const HeroSection = () => {
   const { t } = useLang();
+  const prefersReducedMotion = useReducedMotion();
+  const isMobile = useIsMobile();
+  
+  // Skip heavy animations on mobile or when reduced motion is preferred
+  const shouldSkipAnimations = isMobile || prefersReducedMotion;
 
   return (
     <section
@@ -103,8 +109,12 @@ export const HeroSection = () => {
       >
         <div className="relative w-full h-full">
           <img
-            src="https://images.unsplash.com/photo-1759192154601-d8849f778b57?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwxfHxiYWxhbmNlZCUyMHN0b25lcyUyMGNhaXJuJTIwYWJzdHJhY3QlMjBtaW5pbWFsaXN0fGVufDB8fHx8MTc3MjcwNjY2N3ww&ixlib=rb-4.1.0&q=85&w=600"
+            src="https://images.unsplash.com/photo-1759192154601-d8849f778b57?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwxfHxiYWxhbmNlZCUyMHN0b25lcyUyMGNhaXJuJTIwYWJzdHJhY3QlMjBtaW5pbWFsaXN0fGVufDB8fHx8MTc3MjcwNjY2N3ww&ixlib=rb-4.1.0&q=80&w=600"
             alt="Cairn stones"
+            width="600"
+            height="840"
+            decoding="async"
+            fetchPriority="high"
             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
           />
           {/* Gradient fade on left edge for text contrast */}

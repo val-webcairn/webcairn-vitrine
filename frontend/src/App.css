@@ -5,6 +5,24 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Mobile: Reduce animations for performance and accessibility */
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Skip animations on mobile for performance */
+  html[data-mobile-reduced="true"] *,
+  html[data-mobile-reduced="true"] *::before,
+  html[data-mobile-reduced="true"] *::after {
+    animation-play-state: paused !important;
+  }
+}
+
 /* Remove outline on interactive elements, use custom focus */
 button:focus-visible,
 a:focus-visible,

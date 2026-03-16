@@ -5,16 +5,27 @@ import { PortfolioSection } from "@/components/custom/PortfolioSection";
 import { PricingSection } from "@/components/custom/PricingSection";
 import { AidesSection } from "@/components/custom/AidesSection";
 import { ContactSection } from "@/components/custom/ContactSection";
+import { LazySection } from "@/components/LazySection";
 
 export const HomePage = () => {
   return (
     <main>
       <HeroSection />
-      <ServicesSection />
-      <PortfolioSection />
-      <PricingSection showLink={true} />
-      <AidesSection />
-      <ContactSection />
+      <LazySection>
+        <ServicesSection />
+      </LazySection>
+      <LazySection>
+        <PortfolioSection />
+      </LazySection>
+      <LazySection>
+        <PricingSection showLink={true} />
+      </LazySection>
+      <LazySection>
+        <AidesSection />
+      </LazySection>
+      <LazySection>
+        <ContactSection />
+      </LazySection>
     </main>
   );
 };

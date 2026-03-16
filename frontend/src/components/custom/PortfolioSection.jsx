@@ -4,10 +4,10 @@ import { ArrowUpRight, MoveRight } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
 
 const projectImages = [
-  'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80',
-  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
-  'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=80',
-  'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80',
+  'https://images.unsplash.com/photo-1509440159596-0249088772ff?fm=webp&w=800&q=80',
+  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?fm=webp&w=800&q=80',
+  'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?fm=webp&w=800&q=80',
+  'https://images.unsplash.com/photo-1513104890138-7c749659a591?fm=webp&w=800&q=80',
 ];
 
 export const PortfolioSection = () => {
@@ -15,9 +15,9 @@ export const PortfolioSection = () => {
   const scrollRef = useRef(null);
   const [isInteracting, setIsInteracting] = useState(false);
 
-  // Triple projects arrays to allow a long seamless continuous scroll
-  const displayProjects = [...t.portfolio.projects, ...t.portfolio.projects, ...t.portfolio.projects];
-  const displayImages = [...projectImages, ...projectImages, ...projectImages];
+  // Duplicate list once for smooth scroll while limiting initial page payload.
+  const displayProjects = [...t.portfolio.projects, ...t.portfolio.projects];
+  const displayImages = [...projectImages, ...projectImages];
 
   // Auto-scroll logic
   useEffect(() => {
@@ -116,6 +116,11 @@ export const PortfolioSection = () => {
                 <img
                   src={displayImages[i]}
                   alt={project.name}
+                  width="800"
+                  height="1000"
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   draggable={false}
                 />

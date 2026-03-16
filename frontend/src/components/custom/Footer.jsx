@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLang } from '@/contexts/LanguageContext';
 import { LegalModal } from '@/components/custom/LegalModal';
 

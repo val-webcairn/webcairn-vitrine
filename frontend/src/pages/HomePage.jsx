@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from "react";
 import { HeroSection } from "@/components/custom/HeroSection";
 import { LazySection } from "@/components/LazySection";
+import { useLang } from "@/contexts/LanguageContext";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ServicesSection = lazy(() =>
   import("@/components/custom/ServicesSection").then((m) => ({ default: m.ServicesSection }))
@@ -21,6 +23,21 @@ const ContactSection = lazy(() =>
 const SectionFallback = () => <div aria-hidden="true" className="h-96" />;
 
 export const HomePage = () => {
+  const { lang } = useLang();
+
+  usePageMeta({
+    title:
+      lang === 'fr'
+        ? 'WebCairn | Création de Sites Vitrines'
+        : 'WebCairn | Showcase Website Creation',
+    description:
+      lang === 'fr'
+        ? 'Des sites vitrines posés pierre après pierre — solides, visibles, faits pour durer.'
+        : 'Showcase websites laid stone by stone — solid, visible, built to last.',
+    canonical: 'https://webcairn.fr/',
+    lang,
+  });
+
   return (
     <main>
       <HeroSection />

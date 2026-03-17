@@ -92,7 +92,7 @@ export const PortfolioSection = () => {
           onPointerDown={handleInteraction}
           onTouchStart={handleInteraction}
           onWheel={handleInteraction}
-          className="flex gap-6 px-6 md:px-12 lg:px-20 overflow-x-auto overflow-y-hidden touch-pan-x hide-scrollbar"
+          className="flex gap-6 px-6 md:px-12 lg:px-20 overflow-x-auto overflow-y-hidden touch-auto hide-scrollbar"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {displayProjects.map((project, i) => (

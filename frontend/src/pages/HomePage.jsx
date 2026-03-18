@@ -25,6 +25,46 @@ const SectionFallback = () => <div aria-hidden="true" className="h-96" />;
 export const HomePage = () => {
   const { lang } = useLang();
 
+  const homeStructuredData =
+    lang === 'fr'
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          '@id': 'https://webcairn.fr/#home',
+          url: 'https://webcairn.fr/',
+          name: 'WebCairn | Création de Sites Vitrines',
+          description:
+            'Des sites vitrines posés pierre après pierre — solides, visibles, faits pour durer.',
+          inLanguage: 'fr-FR',
+          about: {
+            '@type': 'Service',
+            name: 'Création de Sites Vitrines',
+            provider: {
+              '@type': 'LocalBusiness',
+              name: 'WebCairn',
+              url: 'https://webcairn.fr/',
+            },
+          },
+        }
+      : {
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          '@id': 'https://webcairn.fr/#home-en',
+          url: 'https://webcairn.fr/',
+          name: 'WebCairn | Showcase Website Creation',
+          description: 'Showcase websites laid stone by stone — solid, visible, built to last.',
+          inLanguage: 'en',
+          about: {
+            '@type': 'Service',
+            name: 'Showcase Website Creation',
+            provider: {
+              '@type': 'LocalBusiness',
+              name: 'WebCairn',
+              url: 'https://webcairn.fr/',
+            },
+          },
+        };
+
   usePageMeta({
     title:
       lang === 'fr'
@@ -36,6 +76,7 @@ export const HomePage = () => {
         : 'Showcase websites laid stone by stone — solid, visible, built to last.',
     canonical: 'https://webcairn.fr/',
     lang,
+    structuredData: homeStructuredData,
   });
 
   return (

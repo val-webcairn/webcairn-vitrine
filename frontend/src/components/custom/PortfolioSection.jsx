@@ -1,50 +1,17 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, MoveRight } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
 
 const projectImages = [
-  'https://images.unsplash.com/photo-1509440159596-0249088772ff?fm=webp&w=800&q=80',
-  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?fm=webp&w=800&q=80',
-  'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?fm=webp&w=800&q=80',
-  'https://images.unsplash.com/photo-1513104890138-7c749659a591?fm=webp&w=800&q=80',
+  '/images/portfolio/project-1.webp',
+  '/images/portfolio/project-2.webp',
+  '/images/portfolio/project-3.webp',
+  '/images/portfolio/project-4.webp',
 ];
 
 export const PortfolioSection = () => {
   const { t } = useLang();
-  const scrollRef = useRef(null);
-  const [isInteracting, setIsInteracting] = useState(false);
-
-  // Duplicate list once for smooth scroll while limiting initial page payload.
-  const displayProjects = [...t.portfolio.projects, ...t.portfolio.projects];
-  const displayImages = [...projectImages, ...projectImages];
-
-  // Auto-scroll logic
-  useEffect(() => {
-    let animationId;
-    let accum = 0;
-
-    const scroll = () => {
-      if (!isInteracting && scrollRef.current) {
-        accum += 0.8; // pixels per frame
-        if (accum >= 1) {
-          scrollRef.current.scrollLeft += Math.floor(accum);
-          accum -= Math.floor(accum);
-        }
-      }
-      animationId = window.requestAnimationFrame(scroll);
-    };
-
-    animationId = window.requestAnimationFrame(scroll);
-    return () => window.cancelAnimationFrame(animationId);
-  }, [isInteracting]);
-
-  // Pause the scroll permanently when the user interacts
-  const handleInteraction = () => {
-    if (!isInteracting) {
-      setIsInteracting(true);
-    }
-  };
 
   return (
     <section id="portfolio" data-testid="portfolio-section" className="py-16 md:py-20 overflow-hidden">
@@ -88,18 +55,13 @@ export const PortfolioSection = () => {
           }
         `}</style>
         <div
-          ref={scrollRef}
-          onPointerDown={handleInteraction}
-          onTouchStart={handleInteraction}
-          onWheel={handleInteraction}
           className="flex gap-6 px-6 md:px-12 lg:px-20 overflow-x-auto overflow-y-hidden touch-auto hide-scrollbar"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {displayProjects.map((project, i) => (
+          {t.portfolio.projects.map((project, i) => (
             <motion.div
               key={i}
               onClick={() => {
-                handleInteraction();
                 if (project.link) {
                   window.open(project.link, '_blank', 'noopener,noreferrer');
                 }
@@ -114,10 +76,10 @@ export const PortfolioSection = () => {
               {/* Image */}
               <div className="relative overflow-hidden aspect-[4/5] mb-5 pointer-events-none rounded-sm">
                 <img
-                  src={displayImages[i]}
+                  src={projectImages[i]}
                   alt={project.name}
-                  width="800"
-                  height="1000"
+                  width="560"
+                  height="700"
                   loading="lazy"
                   decoding="async"
                   fetchPriority="low"

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { useLang } from '@/contexts/LanguageContext';
-import { LegalModal } from '@/components/custom/LegalModal';
+
+const LegalModal = lazy(() =>
+  import('@/components/custom/LegalModal').then((m) => ({ default: m.LegalModal }))
+);
 
 export const Footer = () => {
   const { t, isLegalOpen, setLegalOpen } = useLang();
@@ -53,7 +56,11 @@ export const Footer = () => {
         </div>
       </footer>
 
-      <LegalModal isOpen={isLegalOpen} onClose={() => setLegalOpen(false)} />
+      {isLegalOpen && (
+        <Suspense fallback={null}>
+          <LegalModal isOpen={isLegalOpen} onClose={() => setLegalOpen(false)} />
+        </Suspense>
+      )}
     </>
   );
 };

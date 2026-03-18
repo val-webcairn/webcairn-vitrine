@@ -1,0 +1,30 @@
+[
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.88,
+    "values": [
+      0.88
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "performance",
+    "auditId": "categories",
+    "level": "error",
+    "url": "http://localhost:45936/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.73,
+    "values": [
+      0.73
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "performance",
+    "auditId": "categories",
+    "level": "error",
+    "url": "http://localhost:45936/tarifs/"
+  }
+]

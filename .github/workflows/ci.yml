@@ -34,6 +34,12 @@ jobs:
       - name: Build frontend
         run: npm run build
 
+      - name: Bot-view SEO check
+        run: npm run seo:bot-view
+
+      - name: Lighthouse and SEO quality gate
+        run: npm run lighthouse:ci
+
   backend-config-tests:
     name: Backend Config Tests
     runs-on: ubuntu-latest

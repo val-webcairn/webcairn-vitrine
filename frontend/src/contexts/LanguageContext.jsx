@@ -175,16 +175,6 @@ const translations = {
     },
     legal: {
       title: 'Legal Notice',
-      editor: 'Website Editor',
-      editorContent: 'Lilian Valette — Micro-entreprise (Individual Entrepreneur)\nSIRET: 10201852000019\nCommercial Name: WebCairn\nAddress: 139 Bis Chemin de la Bonde, 13120 Gardanne, France\nEmail: contact@webcairn.fr\nPublication Director: Lilian Valette\nVAT not applicable — art. 293 B of CGI (basic exemption)',
-      host: 'Hosting',
-      hostContent: 'Netlify, Inc.\n512 2nd Street, Suite 200\nSan Francisco, CA 94107, USA\nhttps://www.netlify.com',
-      ip: 'Intellectual Property',
-      ipContent: 'All content on this site (texts, images, graphics, logo) is the property of Lilian Valette / WebCairn and is protected by intellectual property laws. Any reproduction without prior authorization is prohibited.',
-      data: 'Personal Data & GDPR',
-      dataContent: 'Data collected via the contact form (name, email, message) is used solely to respond to your request. It is kept for a maximum of 12 months. No data is sold or shared with third parties. In accordance with the GDPR, you have the right to access, rectify, and delete your data by contacting contact@webcairn.fr. You also have the right to lodge a complaint with the CNIL (www.cnil.fr).',
-      cookies: 'Cookies',
-      cookiesContent: 'This site does not use tracking cookies or third-party analytics tools.',
       close: 'Close'
     }
   },
@@ -362,16 +352,6 @@ const translations = {
     },
     legal: {
       title: 'Mentions Légales',
-      editor: 'Éditeur du site',
-      editorContent: 'Lilian Valette — Micro-entreprise (Entrepreneur Individuel)\nSIRET : 10201852000019\nNom commercial : WebCairn\nAdresse : 139 Bis Chemin de la Bonde, 13120 Gardanne, France\nEmail : contact@webcairn.fr\nDirecteur de la publication : Lilian Valette\nTVA non applicable — art. 293 B du CGI (franchise en base)',
-      host: 'Hébergement',
-      hostContent: 'Netlify, Inc.\n512 2nd Street, Suite 200\nSan Francisco, CA 94107, USA\nhttps://www.netlify.com',
-      ip: 'Propriété intellectuelle',
-      ipContent: 'L\'ensemble du contenu de ce site (textes, images, graphismes, logo) est la propriété de Lilian Valette / WebCairn et est protégé par les lois relatives à la propriété intellectuelle. Toute reproduction sans autorisation préalable est interdite.',
-      data: 'Données personnelles & RGPD',
-      dataContent: 'Les données collectées via le formulaire de contact (nom, email, message) sont utilisées uniquement pour répondre à votre demande. Elles sont conservées pendant une durée maximale de 12 mois. Aucune donnée n\'est vendue ni partagée avec des tiers. Conformément au RGPD, vous disposez d\'un droit d\'accès, de rectification et de suppression de vos données en contactant contact@webcairn.fr. Vous disposez également du droit d\'introduire une réclamation auprès de la CNIL (www.cnil.fr).',
-      cookies: 'Cookies',
-      cookiesContent: 'Ce site n\'utilise pas de cookies de suivi ni d\'outils d\'analyse tiers.',
       close: 'Fermer'
     }
   }

@@ -5,9 +5,12 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Navigation } from "@/components/custom/Navigation";
 import { Footer } from "@/components/custom/Footer";
-import { HomePage } from "@/pages/HomePage";
+import { HomePageSkeleton } from "@/components/HomePageSkeleton";
 import { useIsMobile } from "@/hooks/useAnimationPrefs";
 
+const HomePage = lazy(() =>
+  import("@/pages/HomePage").then((m) => ({ default: m.HomePage }))
+);
 const PricingPage = lazy(() =>
   import("@/pages/PricingPage").then((m) => ({ default: m.PricingPage }))
 );
@@ -93,7 +96,14 @@ function App() {
           <ScrollToAnchor />
           <div className="flex-grow">
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/"
+                element={
+                  <Suspense fallback={<HomePageSkeleton />}>
+                    <HomePage />
+                  </Suspense>
+                }
+              />
               <Route
                 path="/tarifs"
                 element={

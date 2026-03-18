@@ -7,12 +7,39 @@ const DEFAULTS = {
   lang: 'fr',
 };
 
-export function usePageMeta({ title, description, canonical, lang }) {
+const PAGE_SCHEMA_ATTR = 'data-page-jsonld';
+
+export function usePageMeta({ title, description, canonical, lang, structuredData }) {
   useEffect(() => {
+    const setMetaContent = (selector, content) => {
+      const node = document.querySelector(selector);
+      if (node) node.setAttribute('content', content);
+    };
+
+    const removePageJsonLd = () => {
+      document.querySelectorAll(`script[type="application/ld+json"][${PAGE_SCHEMA_ATTR}]`).forEach((el) => el.remove());
+    };
+
+    const setPageJsonLd = (schema) => {
+      removePageJsonLd();
+      if (!schema) return;
+
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.setAttribute(PAGE_SCHEMA_ATTR, 'true');
+      script.textContent = JSON.stringify(schema);
+      document.head.appendChild(script);
+    };
+
     document.title = title;
 
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', description);
+    setMetaContent('meta[name="description"]', description);
+    setMetaContent('meta[property="og:title"]', title);
+    setMetaContent('meta[property="og:description"]', description);
+    setMetaContent('meta[property="og:url"]', canonical);
+    setMetaContent('meta[property="twitter:title"]', title);
+    setMetaContent('meta[property="twitter:description"]', description);
+    setPageJsonLd(structuredData);
 
     const canonicalLink = document.querySelector('link[rel="canonical"]');
     if (canonicalLink) canonicalLink.setAttribute('href', canonical);
@@ -32,12 +59,17 @@ export function usePageMeta({ title, description, canonical, lang }) {
 
     return () => {
       document.title = DEFAULTS.title;
-      const desc = document.querySelector('meta[name="description"]');
-      if (desc) desc.setAttribute('content', DEFAULTS.description);
+      setMetaContent('meta[name="description"]', DEFAULTS.description);
+      setMetaContent('meta[property="og:title"]', DEFAULTS.title);
+      setMetaContent('meta[property="og:description"]', DEFAULTS.description);
+      setMetaContent('meta[property="og:url"]', DEFAULTS.canonical);
+      setMetaContent('meta[property="twitter:title"]', DEFAULTS.title);
+      setMetaContent('meta[property="twitter:description"]', DEFAULTS.description);
+      removePageJsonLd();
       const canon = document.querySelector('link[rel="canonical"]');
       if (canon) canon.setAttribute('href', DEFAULTS.canonical);
       document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
       document.documentElement.setAttribute('lang', DEFAULTS.lang);
     };
-  }, [title, description, canonical, lang]);
+  }, [title, description, canonical, lang, structuredData]);
 }

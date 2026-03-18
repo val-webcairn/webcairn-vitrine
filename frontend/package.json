@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/manrope": "^5.2.8",
+    "@fontsource/syne": "^5.2.7",
     "@hookform/resolvers": "^5.0.1",
     "@radix-ui/react-slot": "^1.2.0",
     "@radix-ui/react-toast": "^1.2.11",
@@ -26,11 +28,13 @@
     "zod": "^3.24.4"
   },
   "scripts": {
-    "start": "vite",
-    "build": "vite build",
+    "dev": "vite",
+    "start": "vite preview --host --port 4173",
+    "build": "vite build && node scripts/create-route-aliases.mjs",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ci": "vitest run"
+    "test:ci": "vitest run",
+    "lighthouse:ci": "npx --yes @lhci/cli@0.15.x autorun --config=.lighthouserc.json"
   },
   "browserslist": {
     "production": [
@@ -45,8 +49,8 @@
     ]
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.0.4",
     "@eslint/js": "9.39.1",
+    "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.20",
     "eslint": "9.39.1",
     "eslint-plugin-import": "2.31.0",

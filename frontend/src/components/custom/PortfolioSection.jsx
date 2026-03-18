@@ -78,8 +78,8 @@ export const PortfolioSection = () => {
                 <img
                   src={projectImages[i]}
                   alt={project.name}
-                  width="560"
-                  height="700"
+                  width="760"
+                  height="950"
                   loading="lazy"
                   decoding="async"
                   fetchPriority="low"

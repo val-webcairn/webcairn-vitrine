@@ -62,7 +62,7 @@ const checkRoute = async (route) => {
     failures
   );
 
-  const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  const jsonLdMatch = html.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i);
   if (!jsonLdMatch) {
     failures.push(`${route.name}: missing json-ld script`);
   } else {

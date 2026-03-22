@@ -30,7 +30,7 @@
   "scripts": {
     "dev": "vite",
     "start": "vite preview --host --port 4173",
-    "build": "vite build && node scripts/create-route-aliases.mjs",
+    "build": "vite build && node scripts/generate-route-html.mjs && node scripts/check-static-seo.mjs",
     "preview": "vite preview",
     "test": "vitest",
     "test:ci": "vitest run",

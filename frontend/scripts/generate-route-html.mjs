@@ -194,8 +194,8 @@ const applyHeadValues = (html, values) => {
 
   next = replaceTagContent(
     next,
-    /<script type="application\/ld\+json">[\s\S]*?<\/script>/i,
-    `<script type="application/ld+json">\n${serializedJsonLd}\n  </script>`,
+    /<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/i,
+    `<script type="application/ld+json" data-page-jsonld>\n${serializedJsonLd}\n  </script>`,
     'json-ld script'
   );
 

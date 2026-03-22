@@ -1,1 +1,5 @@
-/*    /index.html   200
+http://webcairn.fr/* https://webcairn.fr/:splat 301!
+http://www.webcairn.fr/* https://webcairn.fr/:splat 301!
+https://www.webcairn.fr/* https://webcairn.fr/:splat 301!
+
+/* /index.html 200

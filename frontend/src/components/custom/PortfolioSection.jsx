@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, MoveRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, MoveRight } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
 
 const projectImages = [
@@ -21,7 +21,7 @@ const PortfolioCard = ({ project, imageSrc, index }) => {
   const cardContent = (
     <>
       {/* Image */}
-      <div className="relative overflow-hidden aspect-[4/5] mb-5 pointer-events-none rounded-sm">
+      <div data-portfolio-card-image className="relative overflow-hidden aspect-[4/5] mb-5 pointer-events-none rounded-sm">
         <img
           src={imageSrc}
           alt={project.name}
@@ -75,6 +75,7 @@ const PortfolioCard = ({ project, imageSrc, index }) => {
         target="_blank"
         rel="noopener noreferrer"
         data-testid={`portfolio-project-card-${index}`}
+        data-portfolio-card
         className={cardClass}
         {...motionProps}
       >
@@ -86,6 +87,7 @@ const PortfolioCard = ({ project, imageSrc, index }) => {
   return (
     <motion.div
       data-testid={`portfolio-project-card-${index}`}
+      data-portfolio-card
       className={cardClass}
       {...motionProps}
     >
@@ -94,8 +96,114 @@ const PortfolioCard = ({ project, imageSrc, index }) => {
   );
 };
 
+const PortfolioArrowButton = ({ side, onClick, label, arrowTop, children }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    aria-label={label}
+    style={arrowTop !== null ? { top: arrowTop } : undefined}
+    className={`hidden lg:flex absolute ${side === 'left' ? 'left-6' : 'right-6'} top-1/2 -translate-y-1/2 z-20 items-center gap-2 px-3 py-1.5 bg-[hsl(var(--primary))] text-background text-[9px] uppercase font-extrabold tracking-[0.2em] backdrop-blur-md rounded-sm border border-[hsl(var(--primary))] shadow-md transition-all duration-300 hover:brightness-110`}
+  >
+    {children}
+  </button>
+);
+
 export const PortfolioSection = () => {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const controlsWrapperRef = useRef(null);
+  const scrollContainerRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [cardStep, setCardStep] = useState(0);
+  const [arrowTop, setArrowTop] = useState(null);
+
+  const updateScrollState = useCallback(() => {
+    const container = scrollContainerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+    const epsilon = 2;
+    setCanScrollLeft(container.scrollLeft > epsilon);
+    setCanScrollRight(container.scrollLeft < maxScrollLeft - epsilon);
+  }, []);
+
+  const updateCardStep = useCallback(() => {
+    const container = scrollContainerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const firstCard = container.querySelector('[data-portfolio-card]');
+    if (!firstCard) {
+      setCardStep(container.clientWidth * 0.85);
+      return;
+    }
+
+    const computedStyle = window.getComputedStyle(container);
+    const gapValue = Number.parseFloat(computedStyle.columnGap || computedStyle.gap || '0');
+    const safeGap = Number.isNaN(gapValue) ? 0 : gapValue;
+    setCardStep(firstCard.getBoundingClientRect().width + safeGap);
+  }, []);
+
+  const updateArrowTop = useCallback(() => {
+    const container = scrollContainerRef.current;
+    const wrapper = controlsWrapperRef.current;
+    if (!container || !wrapper) {
+      return;
+    }
+
+    const firstCardImage = container.querySelector('[data-portfolio-card-image]');
+    if (!firstCardImage) {
+      setArrowTop(null);
+      return;
+    }
+
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const imageRect = firstCardImage.getBoundingClientRect();
+    setArrowTop(imageRect.top - wrapperRect.top + imageRect.height / 2);
+  }, []);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const onScroll = () => updateScrollState();
+    const onResize = () => {
+      updateCardStep();
+      updateScrollState();
+      updateArrowTop();
+    };
+
+    updateCardStep();
+    updateScrollState();
+    updateArrowTop();
+
+    container.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      container.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [updateCardStep, updateScrollState, updateArrowTop, t.portfolio.projects.length]);
+
+  const scrollByDirection = (direction) => {
+    const container = scrollContainerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const fallbackStep = container.clientWidth * 0.85;
+    const step = cardStep > 0 ? cardStep : fallbackStep;
+    container.scrollBy({ left: direction * step, behavior: 'smooth' });
+  };
+
+  const previousLabel = lang === 'fr' ? 'Projet precedent' : 'Previous project';
+  const nextLabel = lang === 'fr' ? 'Projet suivant' : 'Next project';
 
   return (
     <section id="portfolio" data-testid="portfolio-section" className="py-16 md:py-20 overflow-hidden">
@@ -132,13 +240,35 @@ export const PortfolioSection = () => {
       </div>
 
       {/* Horizontal scroll projects */}
-      <div className="w-full mt-12 md:mt-24 pb-8 relative">
+      <div ref={controlsWrapperRef} className="w-full mt-12 md:mt-24 pb-8 relative">
+        {canScrollLeft && (
+          <PortfolioArrowButton
+            side="left"
+            onClick={() => scrollByDirection(-1)}
+            label={previousLabel}
+            arrowTop={arrowTop}
+          >
+            <ArrowLeft size={14} strokeWidth={1.8} />
+          </PortfolioArrowButton>
+        )}
+        {canScrollRight && (
+          <PortfolioArrowButton
+            side="right"
+            onClick={() => scrollByDirection(1)}
+            label={nextLabel}
+            arrowTop={arrowTop}
+          >
+            <ArrowRight size={14} strokeWidth={1.8} />
+          </PortfolioArrowButton>
+        )}
+
         <style>{`
           .hide-scrollbar::-webkit-scrollbar {
             display: none;
           }
         `}</style>
         <div
+          ref={scrollContainerRef}
           className="flex gap-6 px-6 md:px-12 lg:px-20 overflow-x-auto overflow-y-hidden touch-auto hide-scrollbar"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >

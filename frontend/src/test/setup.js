@@ -1,6 +1,12 @@
 class IntersectionObserverMock {
-  constructor() {}
-  observe() {}
+  constructor(callback) {
+    this.callback = callback;
+  }
+  observe(target) {
+    if (typeof this.callback === 'function') {
+      this.callback([{ isIntersecting: true, target }]);
+    }
+  }
   unobserve() {}
   disconnect() {}
   takeRecords() { return []; }

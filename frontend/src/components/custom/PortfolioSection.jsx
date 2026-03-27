@@ -4,7 +4,6 @@ import { ArrowUpRight, MoveRight } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
 
 const projectImages = [
-  '/images/portfolio/project-1.webp',
   '/images/portfolio/project-2.webp',
   '/images/portfolio/project-3.webp',
   '/images/portfolio/project-4.webp',
